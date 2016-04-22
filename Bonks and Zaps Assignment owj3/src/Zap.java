@@ -1,5 +1,5 @@
 
-public class Bonk implements Being{
+public class Zap implements Being{
 
 	@Override
 	public String getName() {
@@ -24,5 +24,5 @@ public class Bonk implements Being{
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 }
