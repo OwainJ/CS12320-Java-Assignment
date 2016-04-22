@@ -22,6 +22,12 @@ public class Application {
 		
 	}
 	
-	private static void 
+	private static void populateWithBonks(int bonkStartPop) {
+		
+	}
+	
+	private static void populateWithZaps(int zapStartPop) {
+		
+	}
 
 }
