@@ -23,6 +23,13 @@ public class Application {
 	}
 	
 	private static void populateWithBonks(int bonkStartPop) {
+		int counter = bonkStartPop;
+		int nameGen = 1;
+		
+		while(counter >= 0){
+			Bonk nameGen = new Bonk();
+		}
+		
 		
 	}
 	
