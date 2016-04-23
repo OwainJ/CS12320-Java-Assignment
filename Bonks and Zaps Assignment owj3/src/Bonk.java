@@ -2,6 +2,10 @@
 public class Bonk implements Being{
 	String name;
 	
+	public Bonk(String newName){
+		name = newName;
+	}
+	
 
 	@Override
 	public String getName() {

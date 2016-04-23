@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GridWorld {
 
@@ -12,7 +13,12 @@ public class GridWorld {
 	public GridWorld(int x, int y){
 		GRID_WORLD_X_VALUE = x; //Sets the X value of grid world
 		GRID_WORLD_Y_VALUE = y; //Sets the Y value of grid world
+		
 		gridWorld = new ArrayList[GRID_WORLD_X_VALUE][GRID_WORLD_Y_VALUE];
+		bonks = new ArrayList<Bonk>();
+		zaps = new ArrayList<Zap>();
+		
+		System.out.println("GridWorld Generated!");
 		
 	}
 	
@@ -28,9 +34,16 @@ public class GridWorld {
 		
 		return toAdd;
 	}
-	
-	
-	
-	
+
+	@Override
+	public String toString() {
+		System.out.println("GridWorld toString:");
+		return "====GridWorld===="
+				+ "\n GRID_WORLD_X_VALUE= " + GRID_WORLD_X_VALUE 
+				+ "\n GRID_WORLD_Y_VALUE= " + GRID_WORLD_Y_VALUE
+				+ "\n gridWorld= " + Arrays.toString(gridWorld) 
+				+ "\n bonks= " + bonks 
+				+ "\n zaps= " + zaps;
+	}
 	
 }
