@@ -6,12 +6,27 @@ public class GridWorld {
 	private final int GRID_WORLD_Y_VALUE; //The Y value of GridWorld
 	
 	private ArrayList<Being>[][] gridWorld;
+	private ArrayList<Bonk> bonks;
+	private ArrayList<Zap> zaps;
 	
 	public GridWorld(int x, int y){
 		GRID_WORLD_X_VALUE = x; //Sets the X value of grid world
 		GRID_WORLD_Y_VALUE = y; //Sets the Y value of grid world
 		gridWorld = new ArrayList[GRID_WORLD_X_VALUE][GRID_WORLD_Y_VALUE];
 		
+	}
+	
+	public Bonk addBonk(Bonk toAdd) {
+		
+		bonks.add(toAdd);
+		
+		return toAdd;	
+	}
+	
+	public Zap addZap (Zap toAdd) {
+		zaps.add(toAdd);
+		
+		return toAdd;
 	}
 	
 	

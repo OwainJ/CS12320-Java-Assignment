@@ -1,5 +1,9 @@
 
 public class Application {
+	Bonk bonk = null;
+	Zap zap = null;
+	int gridWorldX = 20;
+	int gridWorldY = 20;
 	
 	public static void main(String[] args) {
 		//gridWorld.startGame(); //could use this to start
@@ -14,6 +18,14 @@ public class Application {
 
 	private static void printMenu() {
 		// TODO Auto-generated method stub
+		System.out.println("\n ===Main Menu=== "
+				+ "\n 1	- Create GridWorld 		//Not yet implemented  "
+				+ "\n 2	- Populate with Bonks 		//Not yet implemented  "
+				+ "\n 3	- Populate with Zaps 		//Not yet implemented "
+				+ "\n 4	- Start Simulation 		//Not yet implemented "
+				+ "\n 5	- Clear GridWorld 		//Not yet implemented "
+				+ "\n 6	- Quit 				//Not yet implemented "
+				+ "\n ===============");
 		
 	}
 
@@ -24,7 +36,6 @@ public class Application {
 	
 	private static void populateWithBonks(int bonkStartPop) {
 		int counter = bonkStartPop;
-		int nameGen = 1;
 		
 		while(counter >= 0){
 			Bonk nameGen = new Bonk();

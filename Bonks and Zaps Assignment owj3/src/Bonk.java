@@ -1,5 +1,7 @@
 
 public class Bonk implements Being{
+	String name;
+	
 
 	@Override
 	public String getName() {
