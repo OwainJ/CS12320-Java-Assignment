@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+//DOIT
+
 public class Application {
 
 	private Scanner in;
