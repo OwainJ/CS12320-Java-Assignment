@@ -1,16 +1,18 @@
 
 public class Bonk implements Being{
 	String name;
+	Position location;
 	
-	public Bonk(String newName){
+	public Bonk(String newName, Position p){
 		name = newName;
+		location = p;
 	}
 	
 
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
 	@Override
@@ -22,7 +24,7 @@ public class Bonk implements Being{
 	@Override
 	public Position getLocation() {
 		// TODO Auto-generated method stub
-		return null;
+		return location;
 	}
 
 	@Override

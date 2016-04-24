@@ -3,12 +3,10 @@ import java.util.Scanner;
 //DOIT
 
 public class Application {
+	
+	GameEngine gameEngine = new GameEngine();
 
 	private Scanner in;
-
-	Bonk bonk = null;
-	Zap zap = null;
-	GridWorld gridWorld = null;
 
 	int bonkStartPopulation = 20;
 	int zapStartPopulation = 20;
@@ -38,11 +36,11 @@ public class Application {
 			switch (choice) {
 
 			case "1":
-				gridWorld = createGridWorld(20, 20);
+				gameEngine.createGridworld(20, 20);
 				break;
 
 			case "2":
-				populateWithBonks(bonkStartPopulation);
+				gameEngine.populateWithBonks(bonkStartPopulation);
 				break;
 
 			case "3":
@@ -84,47 +82,10 @@ public class Application {
 				+ "\n ===============");
 
 	}
-
-	private GridWorld createGridWorld(int i, int j) {
-		System.out.println("CHOICE 1");
-		GridWorld newGridWorld = new GridWorld(i, j);
-		return newGridWorld;
-
-	}
-
-	private void populateWithBonks(int bonkStartPop) {
-		
-		if (gridWorld != null) {
-			
-		int counter = bonkStartPop;
-		int nameCount = 0;
-		String nameGen = "Test";
-
-		while (counter >= 0) {
-			nameGen = "B" + nameCount;
-			Bonk bonk = new Bonk(nameGen);
-			nameCount++;
-			counter--;
-			
-			gridWorld.addBonk(bonk);
-			System.out.print("Created Bonk: ");
-			System.out.print(bonk.getName());
-			System.out.println(" At location: ");
-		}
-		return;
-		}
-		System.err.println("ERROR! GridWorld has not been created!" 
-				+ "\n Please select option '1' on the menu to create a GridWorld ");
-
-	}
-
-	private void populateWithZaps(int zapStartPop) {
-		
-	}
 	
 	private void printGridWorld(){
 		System.out.println("CHOICE 6 - PRINTING...");
-		System.out.println(gridWorld.toString());
+		System.out.println(gameEngine.gridWorld.toString());
 		
 	}
 	
