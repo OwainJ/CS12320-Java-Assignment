@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
+//DOIT
+
 public class GridWorld {
 
 	private final int GRID_WORLD_X_VALUE; //The X value of GridWorld	
