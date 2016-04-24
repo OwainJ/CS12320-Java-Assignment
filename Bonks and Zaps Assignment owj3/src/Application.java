@@ -36,7 +36,7 @@ public class Application {
 			switch (choice) {
 
 			case "1":
-				gameEngine.createGridworld(20, 20);
+				gameEngine.createGridworld(gridWorldX, gridWorldY);
 				break;
 
 			case "2":

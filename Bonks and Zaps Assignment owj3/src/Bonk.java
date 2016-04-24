@@ -1,11 +1,11 @@
 
-public class Bonk implements Being{
+public class Bonk extends Mortals implements Being {
 	String name;
-	Position location;
+	Position position;
 	
 	public Bonk(String newName, Position p){
 		name = newName;
-		location = p;
+		position = p;
 	}
 	
 
@@ -18,19 +18,26 @@ public class Bonk implements Being{
 	@Override
 	public void act() throws CannotActException {
 		// TODO Auto-generated method stub
+		movement(position);
 		
 	}
 
 	@Override
 	public Position getLocation() {
 		// TODO Auto-generated method stub
-		return location;
+		return position;
 	}
 
 	@Override
 	public void setLocation(Position location) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public String toString() {
+		return "Bonk [name=" + name + ", location=" + position + "]";
 	}
 	
 }

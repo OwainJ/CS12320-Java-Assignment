@@ -25,4 +25,11 @@ public class Position {
 		this.rowValue = rowValue;
 	}
 
+	@Override
+	public String toString() {
+		return "Position [columnValue=" + columnValue + ", rowValue=" + rowValue + "]";
+	}
+	
+	
+
 }

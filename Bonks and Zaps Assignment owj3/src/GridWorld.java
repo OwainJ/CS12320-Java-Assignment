@@ -19,7 +19,6 @@ public class GridWorld {
 		gridWorld = new ArrayList[GRID_WORLD_X_VALUE][GRID_WORLD_Y_VALUE];
 		bonks = new ArrayList<Bonk>();
 		zaps = new ArrayList<Zap>();
-		
 		System.out.println("GridWorld Generated!");
 		
 	}
