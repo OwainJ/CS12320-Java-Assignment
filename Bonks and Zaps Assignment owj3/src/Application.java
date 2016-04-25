@@ -11,11 +11,13 @@ public class Application {
 	int bonkStartPopulation = 20;
 	int zapStartPopulation = 20;
 
-	int gridWorldX = 20;
-	int gridWorldY = 20;
+	int gridWorldX = 20; //Column
+	int gridWorldY = 20; //Row
+	
+	int maxDayCount = 20;
 
 	///////////// MAIN
-	public static void main(String[] args) {
+	public static void main(String[] args) throws CannotActException, InterruptedException  {
 		// gridWorld.startGame(); //could use this to start
 		Application app = new Application();
 		app.callMenu();
@@ -26,7 +28,7 @@ public class Application {
 		in = new Scanner(System.in);
 	}
 
-	public void callMenu() {
+	public void callMenu() throws CannotActException, InterruptedException  {
 		String choice;
 		System.out.println("***** BONKS AND ZAPS *****");
 		do {
@@ -48,7 +50,8 @@ public class Application {
 				break;
 
 			case "4":
-				System.err.println("==Not yet implemented ==");
+				gameEngine.setMaxDayCount(maxDayCount);
+				gameEngine.startSimulation();
 				break;
 
 			case "5":
@@ -72,10 +75,10 @@ public class Application {
 	public void printMenu() {
 		// TODO Auto-generated method stub
 		System.out.println("\n ===Main Menu=== " 
-				+ "\n 1	- Create GridWorld 	//Not yet implemented fully  "
-				+ "\n 2	- Populate with Bonks 	//Not yet implemented fully  "
+				+ "\n 1	- Create GridWorld 	//Partially implemented  "
+				+ "\n 2	- Populate with Bonks 	//Partially implemented "
 				+ "\n 3	- Populate with Zaps 	//Not yet implemented "
-				+ "\n 4	- Start Simulation 	//Not yet implemented "
+				+ "\n 4	- Start Simulation 	//Partially implemented "
 				+ "\n 5	- Clear GridWorld 	//Not yet implemented "
 				+ "\n 6	- Print GridWorld 	==DEBUGGING=="
 				+ "\n Q	- Quit" 

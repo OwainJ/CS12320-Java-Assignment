@@ -12,6 +12,10 @@ public class GridWorld {
 	private ArrayList<Bonk> bonks;
 	private ArrayList<Zap> zaps;
 	
+	private int bonkPopulationCount;
+	private int zapPopulationCount;
+	
+	
 	public GridWorld(int x, int y){
 		GRID_WORLD_X_VALUE = x; //Sets the X value of grid world
 		GRID_WORLD_Y_VALUE = y; //Sets the Y value of grid world
@@ -36,6 +40,38 @@ public class GridWorld {
 		return toAdd;
 	}
 
+	public int getBonkPopulationCount() {
+		return bonkPopulationCount;
+	}
+
+	public void setBonkPopulationCount(int bonkPopulationCount) {
+		this.bonkPopulationCount = bonkPopulationCount;
+	}
+
+	public int getZapPopulationCount() {
+		return zapPopulationCount;
+	}
+
+	public void setZapPopulationCount(int zapPopulationCount) {
+		this.zapPopulationCount = zapPopulationCount;
+	}
+
+	public ArrayList<Bonk> getBonks() {
+		return bonks;
+	}
+
+	public ArrayList<Zap> getZaps() {
+		return zaps;
+	}
+
+	public int getGRID_WORLD_X_VALUE() {
+		return GRID_WORLD_X_VALUE;
+	}
+
+	public int getGRID_WORLD_Y_VALUE() {
+		return GRID_WORLD_Y_VALUE;
+	}
+
 	@Override
 	public String toString() {
 		System.out.println("GridWorld toString:");
@@ -45,6 +81,10 @@ public class GridWorld {
 				+ "\n gridWorld= " + Arrays.toString(gridWorld) 
 				+ "\n bonks= " + bonks 
 				+ "\n zaps= " + zaps;
+	}
+	
+	public String gridWorldState() {
+		return bonks + "\n zaps= " + zaps;
 	}
 	
 }

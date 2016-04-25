@@ -7,7 +7,13 @@ public class Mortals {
 	}
 
 	public Position movement(Position p) {
-		movement.moveLeft(p);
+		Position newPosition;
+		
+		newPosition = movement.moveLeft(p);
+		
+		return newPosition;
+		
+		/**
 		movement.moveRight(p);
 		movement.moveUp(p);
 		movement.moveDown(p);
@@ -15,7 +21,7 @@ public class Mortals {
 		movement.moveDiagUpRight(p);
 		movement.moveDiagDownLeft(p);
 		movement.moveDiagDownRight(p);
-
+		 **/
 	}
 
 }

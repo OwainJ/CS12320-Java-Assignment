@@ -18,7 +18,8 @@ public class Bonk extends Mortals implements Being {
 	@Override
 	public void act() throws CannotActException {
 		// TODO Auto-generated method stub
-		movement(position);
+		System.out.println("Bonk act called");
+		position = movement(position);
 		
 	}
 
@@ -37,7 +38,7 @@ public class Bonk extends Mortals implements Being {
 
 	@Override
 	public String toString() {
-		return "Bonk [name=" + name + ", location=" + position + "]";
+		return "/n [Bonk name=" + name + ", location=" + position + "]";
 	}
 	
 }

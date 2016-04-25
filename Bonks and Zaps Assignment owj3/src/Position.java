@@ -27,7 +27,7 @@ public class Position {
 
 	@Override
 	public String toString() {
-		return "Position [columnValue=" + columnValue + ", rowValue=" + rowValue + "]";
+		return "columnValue= " + columnValue + ", rowValue= " + rowValue;
 	}
 	
 	
