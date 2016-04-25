@@ -11,8 +11,8 @@ public class Application {
 	int bonkStartPopulation = 20;
 	int zapStartPopulation = 20;
 
-	int gridWorldX = 20; //Column
-	int gridWorldY = 20; //Row
+	int gridWorldX = 5; //Column
+	int gridWorldY = 5; //Row
 	
 	int maxDayCount = 20;
 

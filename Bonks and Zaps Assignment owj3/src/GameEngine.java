@@ -40,7 +40,7 @@ public class GameEngine {
 
 				position = new Position(x, y);
 
-				Bonk bonk = new Bonk(nameGen, position);
+				Bonk bonk = new Bonk(nameGen, position, true ,gridWorldX, gridWorldY);
 				nameCount++;
 				counter--;
 
@@ -52,9 +52,8 @@ public class GameEngine {
 			}
 			return;
 		}
-		System.err
-				.println("ERROR! GridWorld has not been created!"
-						+ "\n Please select option '1' on the menu to create a GridWorld ");
+		System.err.println("ERROR! GridWorld has not been created!"
+				+ "\n Please select option '1' on the menu to create a GridWorld ");
 
 	}
 
@@ -74,27 +73,28 @@ public class GameEngine {
 		return a;
 	}
 
-	public void startSimulation() throws CannotActException, InterruptedException  {
+	public void startSimulation() throws CannotActException, InterruptedException {
 		System.out.println("=====SIMULATION STARTED=====");
 		System.out.println(maxDayCount);
 
-		while (dayCount <= maxDayCount) {			
+		while (dayCount <= maxDayCount) {
 			printGridWorldState();
-			actZaps();			
+			actZaps();
 			actBonks();
-			dayCount++;			
+			dayCount++;
 			Thread.sleep(1000);
-		}if (dayCount == 0) {
+		}
+		if (dayCount == 0) {
 			System.out.println("=====SIMULATION FINISHED=====");
 			return;
 		}
 
 	}
 
-	private void actBonks() throws CannotActException {	
+	private void actBonks() throws CannotActException {
 		for (Bonk b : gridWorld.getBonks()) {
 			b.act();
-		}		
+		}
 	}
 
 	private void actZaps() {
@@ -102,9 +102,40 @@ public class GameEngine {
 	}
 
 	private void printGridWorldState() {
-		
+
 		System.out.println("===== Day: " + dayCount + " =====");
 		gridWorld.gridWorldState();
+
+		Position posMaxCount;
+		Position posCount;
+		Position bonkPos;
+
+		posMaxCount = new Position(gridWorld.getGRID_WORLD_X_VALUE(), gridWorld.getGRID_WORLD_Y_VALUE());
+		posCount = new Position(0, 0);
+
+		while (posCount.getColumnValue() <= posMaxCount.getColumnValue()
+				&& posCount.getRowValue() <= posMaxCount.getRowValue()) {
+			System.out.print(posCount);
+			System.out.print("[");
+
+			for (Bonk b : gridWorld.getBonks()) {
+				
+				bonkPos = b.getLocation();
+
+				if (bonkPos.getRowValue() == posCount.getRowValue() && bonkPos.getColumnValue() == posCount.getColumnValue()) {
+					System.out.print(b.getName() + ", ");
+				}
+			}
+			System.out.println("]");
+
+			if (posCount.getRowValue() == posMaxCount.getRowValue()) {
+				posCount.plusColumnValueBy1();
+				posCount.setRowValue(0);
+			} else if (posCount.getRowValue() < posMaxCount.getRowValue()) {
+				posCount.plusRowValueBy1();
+			}
+		}
+		return;
 
 	}
 }

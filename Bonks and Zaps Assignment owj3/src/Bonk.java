@@ -2,12 +2,19 @@
 public class Bonk extends Mortals implements Being {
 	String name;
 	Position position;
-	
-	public Bonk(String newName, Position p){
+	Boolean isBonkDead;
+	Boolean isBonkAdult;
+	int gridWorldX; // Column
+	int gridWorldY; // Row
+
+	public Bonk(String newName, Position p, Boolean age, int X, int Y) {
 		name = newName;
 		position = p;
+		gridWorldX = X;
+		gridWorldY = Y;
+		isBonkDead = false;
+		isBonkAdult = age;
 	}
-	
 
 	@Override
 	public String getName() {
@@ -17,11 +24,23 @@ public class Bonk extends Mortals implements Being {
 
 	@Override
 	public void act() throws CannotActException {
-		// TODO Auto-generated method stub
-		System.out.println("Bonk act called");
-		position = movement(position);
+
+		if (isBonkDead == false) {
+			position = movement(position, gridWorldX, gridWorldY);
+			
+		} else {
+			return;
+		}
+	}
+	
+	private void doTheSex() {
+		
+		
+		
 		
 	}
+	
+	
 
 	@Override
 	public Position getLocation() {
@@ -32,13 +51,12 @@ public class Bonk extends Mortals implements Being {
 	@Override
 	public void setLocation(Position location) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	@Override
 	public String toString() {
 		return "/n [Bonk name=" + name + ", location=" + position + "]";
 	}
-	
+
 }

@@ -81,6 +81,17 @@ public class GridWorld {
 				+ "\n gridWorld= " + Arrays.toString(gridWorld) 
 				+ "\n bonks= " + bonks 
 				+ "\n zaps= " + zaps;
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	
 	public String gridWorldState() {

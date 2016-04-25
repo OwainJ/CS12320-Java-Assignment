@@ -5,10 +5,10 @@ public class Movement {
 		
 	}
 	
-	public Position moveLeft(Position position) {
+	public Position moveLeft(Position position, int X, int Y) {
 		Position newPosition;
 		
-		System.out.println("moveLeft currentPosition: " + "(" + position.getColumnValue() + "," + position.getRowValue() +") ");
+		//System.out.println("moveLeft currentPosition: " + "(" + position.getColumnValue() + "," + position.getRowValue() +") ");
 		
 		if(position.getColumnValue() == 0){
 			return position;
@@ -17,15 +17,15 @@ public class Movement {
 			int row = position.getRowValue();
 			col--;
 			newPosition = new Position(col, row);
-			System.out.println("moveLeft newPosition: " + "(" + col + "," + row +") ");
+			//System.out.println("moveLeft newPosition: " + "(" + col + "," + row +") ");
 			return newPosition;
 		}
 	}
 
-	public Position moveRight(Position position) {
+	public Position moveRight(Position position, int X, int Y) {
 		Position newPosition;
 		
-		if(position.getColumnValue() == gridWorld.getGRID_WORLD_X_VALUE()){
+		if(position.getColumnValue() == X){
 			return position;
 		} else {
 			int col = position.getColumnValue();
@@ -36,7 +36,7 @@ public class Movement {
 		}
 	}
 
-	public Position moveUp(Position position) {
+	public Position moveUp(Position position, int X, int Y) {
 		Position newPosition;
 		
 		if(position.getRowValue() == 0){
@@ -50,10 +50,10 @@ public class Movement {
 		}
 	}
 
-	public Position moveDown(Position position) {
+	public Position moveDown(Position position, int X, int Y) {
 		Position newPosition;
 		
-		if(position.getRowValue() == app.gridWorldY){
+		if(position.getRowValue() == Y){
 			return position;
 		} else {
 			int col = position.getColumnValue();
@@ -64,10 +64,10 @@ public class Movement {
 		}
 	}
 
-	public Position moveDiagUpLeft(Position position) {
+	public Position moveDiagUpLeft(Position position, int X, int Y) {
 		Position newPosition;
 		
-		if(position.getRowValue() == 0 && position.getColumnValue() == 0){
+		if(position.getRowValue() == 0 || position.getColumnValue() == 0){
 			return position;
 		} else {
 			int col = position.getColumnValue();
@@ -79,10 +79,10 @@ public class Movement {
 		}
 	}
 
-	public Position moveDiagUpRight(Position position) {
+	public Position moveDiagUpRight(Position position, int X, int Y) {
 		Position newPosition;
 		
-		if(position.getRowValue() == 0 && position.getColumnValue() == app.gridWorldX){
+		if(position.getRowValue() == 0 || position.getColumnValue() == X){
 			return position;
 		} else {
 			int col = position.getColumnValue();
@@ -94,10 +94,10 @@ public class Movement {
 		}
 	}
 
-	public Position moveDiagDownLeft(Position position) {
+	public Position moveDiagDownLeft(Position position, int X, int Y) {
 	Position newPosition;
 		
-		if(position.getRowValue() == app.gridWorldY && position.getColumnValue() == 0){
+		if(position.getRowValue() == Y || position.getColumnValue() == 0){
 			return position;
 		} else {
 			int col = position.getColumnValue();
@@ -109,10 +109,10 @@ public class Movement {
 		}
 	}
 
-	public Position moveDiagDownRight(Position position) {
+	public Position moveDiagDownRight(Position position, int X, int Y) {
 	Position newPosition;
 		
-		if(position.getRowValue() == app.gridWorldY && position.getColumnValue() == app.gridWorldX){
+		if(position.getRowValue() == Y || position.getColumnValue() == X){
 			return position;
 		} else {
 			int col = position.getColumnValue();
@@ -123,5 +123,4 @@ public class Movement {
 			return newPosition;
 		}
 	}
-
 }

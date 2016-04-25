@@ -24,10 +24,18 @@ public class Position {
 	public void setRowValue(int rowValue) {
 		this.rowValue = rowValue;
 	}
+	
+	public void plusColumnValueBy1() {
+		columnValue++;
+	}
+	
+	public void plusRowValueBy1() {
+		rowValue++;
+	}
 
 	@Override
 	public String toString() {
-		return "columnValue= " + columnValue + ", rowValue= " + rowValue;
+		return "[ " + columnValue + ", " + rowValue + " ]";
 	}
 	
 	
