@@ -39,8 +39,10 @@ public class GameEngine {
 				y = randomInt(gridWorldY);
 
 				position = new Position(x, y);
+				
+				Gender gender = randomGender();
 
-				Bonk bonk = new Bonk(nameGen, position, true ,gridWorldX, gridWorldY);
+				Bonk bonk = new Bonk(nameGen, position, true , gender, gridWorldX, gridWorldY);
 				nameCount++;
 				counter--;
 
@@ -71,6 +73,25 @@ public class GameEngine {
 		rand = new Random();
 		int a = rand.nextInt(r);
 		return a;
+	}
+	
+	public Gender randomGender() {
+		int choice;
+		choice = randomInt(1);
+		
+		switch (choice) {
+		case 0:
+			Gender gen = Gender.MALE;
+			return gen;
+			
+		case 1:
+			Gender gen2 = Gender.FEMALE;
+			return gen2;
+			
+			default:
+				System.err.println("ERROR on randomGender() method of GameEngine class");
+				return null;
+		}
 	}
 
 	public void startSimulation() throws CannotActException, InterruptedException {
