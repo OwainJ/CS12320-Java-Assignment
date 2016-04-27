@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 
 public class Zap extends Mortals implements Being {
-	private String name;
-	private Position position;
-	private int gridWorldX; // Column
-	private int gridWorldY; // Row
+	private String name; //stores zap's name
+	private Position position; //stores zap's position
+	
+	private int gridWorldX; //Column
+	private int gridWorldY; //Row
 
 	public Zap(String newName, Position p, int X, int Y) {
 		name = newName;
@@ -12,19 +13,24 @@ public class Zap extends Mortals implements Being {
 		gridWorldX = X;
 		gridWorldY = Y;
 	}
-
-	public void act(ArrayList<Zap> copyOfBonks) throws CannotActException {
-		//kill();
-		position = movement(position, gridWorldX, gridWorldY);
-	}
 	
 	@Override
 	public void act() throws CannotActException {
-		
+		//kill();
+		position = movement(position, gridWorldX, gridWorldY);
 	}
 
-	public void kill() {
-		
+	public ArrayList<Bonk> kill(ArrayList<Bonk> copyOfBonks) {
+		Position bonkPos;
+		for (Bonk b : copyOfBonks) {
+			bonkPos = b.getLocation();
+
+			if (bonkPos.getRowValue() == position.getRowValue()
+					&& bonkPos.getColumnValue() == position.getColumnValue()) {
+				b.bonkDeath();
+			}
+		}
+		return copyOfBonks;
 	}
 
 	

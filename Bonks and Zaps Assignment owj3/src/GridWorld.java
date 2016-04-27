@@ -10,6 +10,7 @@ public class GridWorld {
 	
 	private ArrayList<Being>[][] gridWorld;
 	private ArrayList<Bonk> bonks;
+	private ArrayList<Bonk> bonkBabies;
 	private ArrayList<Zap> zaps;
 	
 	private int bonkPopulationCount;
@@ -22,22 +23,23 @@ public class GridWorld {
 		
 		gridWorld = new ArrayList[GRID_WORLD_X_VALUE][GRID_WORLD_Y_VALUE];
 		bonks = new ArrayList<Bonk>();
+		bonkBabies = new ArrayList<Bonk>();
 		zaps = new ArrayList<Zap>();
 		System.out.println("GridWorld Generated!");
 		
 	}
 	
-	public Bonk addBonk(Bonk toAdd) {
+	public void addBonk(Bonk toAdd) {
 		
 		bonks.add(toAdd);
-		
-		return toAdd;	
+		bonkPopulationCount++;		
+		return;	
 	}
 	
-	public Zap addZap (Zap toAdd) {
+	public void addZap (Zap toAdd) {
 		zaps.add(toAdd);
-		
-		return toAdd;
+		zapPopulationCount++;		
+		return;
 	}
 
 	public int getBonkPopulationCount() {
@@ -60,8 +62,33 @@ public class GridWorld {
 		return bonks;
 	}
 
+	public void setBonks(ArrayList<Bonk> bonks) {
+		this.bonks = bonks;
+	}
+
 	public ArrayList<Zap> getZaps() {
 		return zaps;
+	}
+	
+	public void setZaps(ArrayList<Zap> zaps) {
+		this.zaps = zaps;
+	}
+
+	public ArrayList<Bonk> getBonkBabies() {
+		return bonkBabies;
+	}
+	
+	public void addBonkBaby(Bonk toAdd) {
+		bonkBabies.add(toAdd);	
+		return;
+	}
+	
+	public void clearBonkBabies() {
+		bonkBabies.clear();
+	}
+
+	public void setBonkBabies(ArrayList<Bonk> bonkBabies) {
+		this.bonkBabies = bonkBabies;
 	}
 
 	public int getGRID_WORLD_X_VALUE() {

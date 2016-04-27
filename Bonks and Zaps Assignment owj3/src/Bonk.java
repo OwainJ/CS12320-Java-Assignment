@@ -1,13 +1,16 @@
 import java.util.ArrayList;
 
 public class Bonk extends Mortals implements Being {
-	private String name;
-	private Position position;
-	private Boolean isBonkDead;
-	private Boolean isBonkAdult;
-	private Gender gender;
-	private int gridWorldX; // Column
-	private int gridWorldY; // Row
+	private String name; //stores bonk's name
+	private Position position; //stores bonk's position
+	private Boolean isBonkDead; //checks if bonk is dead
+	private Boolean isBonkAdult; //checks if bonk is an adult
+	private Boolean hasReproduced; //checks if bonk has reproduced this cycle
+	private int countUntilAdult = 1; //waits one cycle until Bonk becomes adult and can start breeding
+	private Gender gender; //stores bonk's gender
+	
+	private int gridWorldX; //Column
+	private int gridWorldY; //Row
 
 	public Bonk(String newName, Position p, Boolean age, Gender g, int X, int Y) {
 		name = newName;
@@ -19,68 +22,89 @@ public class Bonk extends Mortals implements Being {
 		gender = g;
 	}
 
-	public void act(ArrayList<Bonk> copyOfBonks) throws CannotActException {
+	@Override
+	public void act() throws CannotActException {
 
 		if (isBonkDead == false) {
-			doTheSex(copyOfBonks);
 			position = movement(position, gridWorldX, gridWorldY);
-			
+			hasReproduced = false;
 		} else {
 			return;
 		}
-	}
-	
-	@Override
-	public void act() throws CannotActException {
-		// TODO Auto-generated method stub
-		
+
+		if (countUntilAdult > 0) {
+			countUntilAdult--;
+		} else {
+			isBonkAdult = true;
+		}
 	}
 
-	private void doTheSex(ArrayList<Bonk> copyOfBonks) {
+	public Bonk doTheSex(ArrayList<Bonk> copyOfBonks) {
 		Position bonkPos;
 		Gender gen;
+		Bonk babyBonk;
+		String babyName;
 		
-		switch (gender) {
-		case MALE:
-			gen = Gender.FEMALE;
-			System.err.println(gender + " LOOKING FOR FEMALE");
-			break;
-			
-		case FEMALE:
-			gen = Gender.MALE;
-			System.err.println(gender + " LOOKING FOR MALE");
-			break;
-			
-			default:
-				System.err.println("ERROR on gender checking of doTheSex(); method of Bonk class");
+		if (isBonkAdult == true && hasReproduced == false) {
+			switch (gender) {
+			case MALE:
+				gen = Gender.FEMALE;
+				// System.err.println(gender + " LOOKING FOR FEMALE");
+				break;
+
+			case FEMALE:
 				gen = Gender.MALE;
-		}
-		
-		for (Bonk b : copyOfBonks) {		
-			bonkPos = b.getLocation();
-			
-			if (bonkPos.getRowValue() == position.getRowValue() && bonkPos.getColumnValue() == position.getColumnValue() 
-					&& b.getIsBonkAdult() == true && b.getGender() == gen) {
-				System.err.println(gen + " LOVER FOUND!");
-				
-				///ADD CREATE BABIES CODE
-				
-				return;
-				
+				// System.err.println(gender + " LOOKING FOR MALE");
+				break;
+
+			default:
+				// System.err.println("ERROR on gender checking of doTheSex();
+				// method of Bonk class");
+				gen = Gender.MALE;
 			}
-			//System.err.println("LOVER NOT FOUND!");
+
+			for (Bonk b : copyOfBonks) {
+				bonkPos = b.getLocation();
+
+				if (bonkPos.getRowValue() == position.getRowValue()
+						&& bonkPos.getColumnValue() == position.getColumnValue() && b.getIsBonkAdult() == true
+						&& b.getGender() == gen && b.getIsBonkDead() == false) {
+					// System.err.println(gen + " LOVER FOUND!");
+
+					babyName = name + b.getName();
+
+					/// ADD CREATE BABIES CODE
+					babyBonk = new Bonk(babyName, position, false, Gender.MALE, gridWorldX, gridWorldY);
+					hasReproduced = true;
+
+					return babyBonk;
+
+				}
+			}
+			// System.err.println("LOVER NOT FOUND!");
+		} else {
+			return null;
 		}
-		
-		
-		
+		return null;
 	}
-	
+
+	public void bonkDeath() {
+		if (isBonkDead == false) {
+			isBonkDead = true;
+			name = name + "DEAD";
+		}
+	}
+
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return name;
+		if (isBonkAdult == true) {
+			return name;
+		} else {
+			return name + "Baby";
+		}
 	}
-	
+
 	public void setName(String name) {
 		// TODO Auto-generated method stub
 		this.name = name;
@@ -97,7 +121,7 @@ public class Bonk extends Mortals implements Being {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	public Boolean getIsBonkDead() {
 		return isBonkDead;
 	}
@@ -124,8 +148,8 @@ public class Bonk extends Mortals implements Being {
 
 	@Override
 	public String toString() {
-		return "[Bonk name=" + name + ", location=" + position + ", Gender=" + gender 
-				+ ", Adult=" + isBonkAdult + ", isBonkDead=" + isBonkDead + "]";
+		return "[Bonk name=" + name + ", location=" + position + ", Gender=" + gender + ", Adult=" + isBonkAdult
+				+ ", isBonkDead=" + isBonkDead + "]";
 	}
 
 }

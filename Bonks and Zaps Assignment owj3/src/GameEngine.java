@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GameEngine {
@@ -5,6 +6,7 @@ public class GameEngine {
 	Random rand;
 	Bonk bonk;
 	Zap zap;
+	boolean babiesToAdd;
 
 	int gridWorldX;
 	int gridWorldY;
@@ -39,10 +41,10 @@ public class GameEngine {
 				y = randomInt(gridWorldY);
 
 				position = new Position(x, y);
-				
+
 				Gender gender = randomGender();
 
-				Bonk bonk = new Bonk(nameGen, position, true , gender, gridWorldX, gridWorldY);
+				Bonk bonk = new Bonk(nameGen, position, true, gender, gridWorldX, gridWorldY);
 				nameCount++;
 				counter--;
 
@@ -106,23 +108,23 @@ public class GameEngine {
 		int a = rand.nextInt(r);
 		return a;
 	}
-	
+
 	public Gender randomGender() {
 		int choice;
 		choice = randomInt(2);
-		
+
 		switch (choice) {
 		case 0:
 			Gender gen = Gender.MALE;
 			return gen;
-			
+
 		case 1:
 			Gender gen2 = Gender.FEMALE;
 			return gen2;
-			
-			default:
-				System.err.println("ERROR on randomGender() method of GameEngine class");
-				return null;
+
+		default:
+			System.err.println("ERROR on randomGender() method of GameEngine class");
+			return null;
 		}
 	}
 
@@ -134,7 +136,9 @@ public class GameEngine {
 			printGridWorldState();
 			actZaps();
 			actBonks();
+			populateNewBonkBabies();
 			dayCount++;
+			
 			Thread.sleep(1000);
 		}
 		if (dayCount == 0) {
@@ -145,14 +149,34 @@ public class GameEngine {
 	}
 
 	private void actBonks() throws CannotActException {
+		Bonk newBabyBonk;
 		for (Bonk b : gridWorld.getBonks()) {
-			b.act(gridWorld.getBonks());
+			b.act();
+
+			if (b.getIsBonkDead() == false) {
+				newBabyBonk = b.doTheSex(gridWorld.getBonks());
+				if (newBabyBonk != null) {
+					gridWorld.addBonkBaby(newBabyBonk);
+					babiesToAdd = true;
+				}
+			}
 		}
 	}
 
 	private void actZaps() throws CannotActException {
 		for (Zap z : gridWorld.getZaps()) {
-			z.act(gridWorld.getZaps());
+			z.act();
+			gridWorld.setBonks(z.kill(gridWorld.getBonks()));
+		}
+	}
+
+	private void populateNewBonkBabies() {
+		if (babiesToAdd == true) {
+			for (Bonk bBaby : gridWorld.getBonkBabies()) {
+				gridWorld.addBonk(bBaby);
+			}
+			gridWorld.clearBonkBabies();
+			babiesToAdd = false;
 		}
 	}
 
@@ -175,23 +199,25 @@ public class GameEngine {
 			System.out.print("[");
 
 			for (Bonk b : gridWorld.getBonks()) {
-				
+
 				bonkPos = b.getLocation();
 
-				if (bonkPos.getRowValue() == posCount.getRowValue() && bonkPos.getColumnValue() == posCount.getColumnValue()) {
+				if (bonkPos.getRowValue() == posCount.getRowValue()
+						&& bonkPos.getColumnValue() == posCount.getColumnValue()) {
 					System.out.print(b.getName() + ", ");
 				}
 			}
-			
+
 			for (Zap z : gridWorld.getZaps()) {
-				
+
 				zapPos = z.getLocation();
 
-				if (zapPos.getRowValue() == posCount.getRowValue() && zapPos.getColumnValue() == posCount.getColumnValue()) {
+				if (zapPos.getRowValue() == posCount.getRowValue()
+						&& zapPos.getColumnValue() == posCount.getColumnValue()) {
 					System.out.print(z.getName() + ", ");
 				}
 			}
-			
+
 			System.out.println("]");
 
 			if (posCount.getRowValue() == posMaxCount.getRowValue()) {
