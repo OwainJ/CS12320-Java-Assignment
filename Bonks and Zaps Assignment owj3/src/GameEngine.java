@@ -7,6 +7,7 @@ public class GameEngine {
 	Bonk bonk;
 	Zap zap;
 	boolean babiesToAdd;
+	boolean gridWorldCreated;
 
 	int gridWorldX;
 	int gridWorldY;
@@ -19,7 +20,6 @@ public class GameEngine {
 	}
 
 	public void createGridworld(int i, int j) {
-		System.out.println("CHOICE 1");
 		gridWorld = new GridWorld(i, j);
 		gridWorldX = i;
 		gridWorldY = j;
@@ -101,8 +101,6 @@ public class GameEngine {
 		maxDayCount = count;
 	}
 
-	// ///////////////////SIMULATION CODE PAST THIS LINE/////////////////////
-
 	public int randomInt(int r) {
 		rand = new Random();
 		int a = rand.nextInt(r);
@@ -127,34 +125,41 @@ public class GameEngine {
 			return null;
 		}
 	}
-	
+
+	// ///////////////////SIMULATION CODE PAST THIS LINE/////////////////////
+
 	public void resetSimulation() {
 		gridWorld = null;
 		bonk = null;
 		zap = null;
 		gridWorldX = 0;
 		gridWorldY = 0;
-		
+
 		System.out.println("====GridWorld has been reset====");
-		
+
 	}
 
 	public void startSimulation() throws CannotActException, InterruptedException {
-		System.out.println("=====SIMULATION STARTED=====");
-		System.out.println(maxDayCount);
+		if (gridWorld != null) {
 
-		while (dayCount <= maxDayCount) {
-			printGridWorldState();
-			actZaps();
-			actBonks();
-			populateNewBonkBabies();
-			dayCount++;
-			
-			Thread.sleep(1000);
-		}
-		if (dayCount == 0) {
-			System.out.println("=====SIMULATION FINISHED=====");
-			return;
+			System.out.println("=====SIMULATION STARTED=====");
+			System.out.println(maxDayCount);
+
+			while (dayCount <= maxDayCount) {
+				printGridWorldState();
+				actZaps();
+				actBonks();
+				populateNewBonkBabies();
+				dayCount++;
+
+				Thread.sleep(1000);
+			}
+			if (dayCount == 0) {
+				System.out.println("=====SIMULATION FINISHED=====");
+				return;
+			}
+		} else {
+			System.err.println("ERROR GridWorld not created, cannot start simulation");
 		}
 
 	}
