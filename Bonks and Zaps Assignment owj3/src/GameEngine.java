@@ -127,6 +127,17 @@ public class GameEngine {
 			return null;
 		}
 	}
+	
+	public void resetSimulation() {
+		gridWorld = null;
+		bonk = null;
+		zap = null;
+		gridWorldX = 0;
+		gridWorldY = 0;
+		
+		System.out.println("====GridWorld has been reset====");
+		
+	}
 
 	public void startSimulation() throws CannotActException, InterruptedException {
 		System.out.println("=====SIMULATION STARTED=====");

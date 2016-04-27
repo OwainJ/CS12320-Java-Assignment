@@ -47,19 +47,15 @@ public class Application {
 				break;
 
 			case "3":
-				System.err.println("==Not yet implemented ==");
-				break;
-
-			case "4":
 				gameEngine.setMaxDayCount(maxDayCount);
 				gameEngine.startSimulation();
 				break;
 
-			case "5":
-				System.err.println("==Not yet implemented ==");
+			case "4":
+				gameEngine.resetSimulation();
 				break;
 				
-			case "6":
+			case "5":
 				printGridWorld();
 				break;
 
@@ -76,12 +72,11 @@ public class Application {
 	public void printMenu() {
 		// TODO Auto-generated method stub
 		System.out.println("\n ===Main Menu=== " 
-				+ "\n 1	- Create GridWorld 	//Partially implemented  "
-				+ "\n 2	- Populate with Bonks 	//Partially implemented "
-				+ "\n 3	- Populate with Zaps 	//Not yet implemented "
-				+ "\n 4	- Start Simulation 	//Partially implemented "
-				+ "\n 5	- Clear GridWorld 	//Not yet implemented "
-				+ "\n 6	- Print GridWorld 	==DEBUGGING=="
+				+ "\n 1	- Create GridWorld "
+				+ "\n 2	- Populate with Bonks "
+				+ "\n 3	- Start Simulation "
+				+ "\n 4	- Reset GridWorld to defaults	//Not fully implemented "
+				+ "\n 5	- Print GridWorld 	//For DEBUG"
 				+ "\n Q	- Quit" 
 				+ "\n ===============");
 
