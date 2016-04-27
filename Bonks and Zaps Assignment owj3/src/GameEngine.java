@@ -50,7 +50,9 @@ public class GameEngine {
 				System.out.print("Created Bonk: ");
 				System.out.print(bonk.getName());
 				System.out.print(" At location: ");
-				System.out.println(bonk.getLocation());
+				System.out.print(bonk.getLocation());
+				System.out.print(" And is a: ");
+				System.out.println(bonk.getGender());
 			}
 			return;
 		}
@@ -60,6 +62,36 @@ public class GameEngine {
 	}
 
 	public void populateWithZaps(int zapStartPop) {
+		Position position;
+		int x;
+		int y;
+
+		if (gridWorld != null) {
+			int counter = zapStartPop;
+			int nameCount = 0;
+			String nameGen;
+
+			while (counter >= 0) {
+				nameGen = "Z" + nameCount;
+				x = randomInt(gridWorldX);
+				y = randomInt(gridWorldY);
+
+				position = new Position(x, y);
+
+				Zap zap = new Zap(nameGen, position, gridWorldX, gridWorldY);
+				nameCount++;
+				counter--;
+
+				gridWorld.addZap(zap);
+				System.out.print("Created Zap: ");
+				System.out.print(zap.getName());
+				System.out.print(" At location: ");
+				System.out.println(zap.getLocation());
+			}
+			return;
+		}
+		System.err.println("ERROR! GridWorld has not been created!"
+				+ "\n Please select option '1' on the menu to create a GridWorld ");
 
 	}
 
@@ -77,7 +109,7 @@ public class GameEngine {
 	
 	public Gender randomGender() {
 		int choice;
-		choice = randomInt(1);
+		choice = randomInt(2);
 		
 		switch (choice) {
 		case 0:
@@ -114,12 +146,14 @@ public class GameEngine {
 
 	private void actBonks() throws CannotActException {
 		for (Bonk b : gridWorld.getBonks()) {
-			b.act();
+			b.act(gridWorld.getBonks());
 		}
 	}
 
-	private void actZaps() {
-
+	private void actZaps() throws CannotActException {
+		for (Zap z : gridWorld.getZaps()) {
+			z.act(gridWorld.getZaps());
+		}
 	}
 
 	private void printGridWorldState() {
@@ -130,6 +164,7 @@ public class GameEngine {
 		Position posMaxCount;
 		Position posCount;
 		Position bonkPos;
+		Position zapPos;
 
 		posMaxCount = new Position(gridWorld.getGRID_WORLD_X_VALUE(), gridWorld.getGRID_WORLD_Y_VALUE());
 		posCount = new Position(0, 0);
@@ -147,6 +182,16 @@ public class GameEngine {
 					System.out.print(b.getName() + ", ");
 				}
 			}
+			
+			for (Zap z : gridWorld.getZaps()) {
+				
+				zapPos = z.getLocation();
+
+				if (zapPos.getRowValue() == posCount.getRowValue() && zapPos.getColumnValue() == posCount.getColumnValue()) {
+					System.out.print(z.getName() + ", ");
+				}
+			}
+			
 			System.out.println("]");
 
 			if (posCount.getRowValue() == posMaxCount.getRowValue()) {

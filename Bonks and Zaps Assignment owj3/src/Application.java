@@ -9,7 +9,7 @@ public class Application {
 	private Scanner in;
 
 	int bonkStartPopulation = 20;
-	int zapStartPopulation = 20;
+	int zapStartPopulation = 5;
 
 	int gridWorldX = 5; //Column
 	int gridWorldY = 5; //Row
@@ -43,6 +43,7 @@ public class Application {
 
 			case "2":
 				gameEngine.populateWithBonks(bonkStartPopulation);
+				gameEngine.populateWithZaps(zapStartPopulation);
 				break;
 
 			case "3":

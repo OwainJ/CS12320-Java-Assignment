@@ -16,7 +16,7 @@ public class Mortals {
 		Position newPosition;
 		int choice;
 		
-		choice = randomInt(7);
+		choice = randomInt(8);
 		switch (choice) {
 		
 		case 0:

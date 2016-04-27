@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Bonk extends Mortals implements Being {
 	private String name;
@@ -18,10 +19,10 @@ public class Bonk extends Mortals implements Being {
 		gender = g;
 	}
 
-	@Override
-	public void act() throws CannotActException {
+	public void act(ArrayList<Bonk> copyOfBonks) throws CannotActException {
 
 		if (isBonkDead == false) {
+			doTheSex(copyOfBonks);
 			position = movement(position, gridWorldX, gridWorldY);
 			
 		} else {
@@ -29,10 +30,45 @@ public class Bonk extends Mortals implements Being {
 		}
 	}
 	
-	private void doTheSex() {
+	@Override
+	public void act() throws CannotActException {
+		// TODO Auto-generated method stub
 		
-		for (Bonk b : gridWorld.getBonks()) {
+	}
+
+	private void doTheSex(ArrayList<Bonk> copyOfBonks) {
+		Position bonkPos;
+		Gender gen;
+		
+		switch (gender) {
+		case MALE:
+			gen = Gender.FEMALE;
+			System.err.println(gender + " LOOKING FOR FEMALE");
+			break;
 			
+		case FEMALE:
+			gen = Gender.MALE;
+			System.err.println(gender + " LOOKING FOR MALE");
+			break;
+			
+			default:
+				System.err.println("ERROR on gender checking of doTheSex(); method of Bonk class");
+				gen = Gender.MALE;
+		}
+		
+		for (Bonk b : copyOfBonks) {		
+			bonkPos = b.getLocation();
+			
+			if (bonkPos.getRowValue() == position.getRowValue() && bonkPos.getColumnValue() == position.getColumnValue() 
+					&& b.getIsBonkAdult() == true && b.getGender() == gen) {
+				System.err.println(gen + " LOVER FOUND!");
+				
+				///ADD CREATE BABIES CODE
+				
+				return;
+				
+			}
+			//System.err.println("LOVER NOT FOUND!");
 		}
 		
 		
@@ -45,8 +81,7 @@ public class Bonk extends Mortals implements Being {
 		return name;
 	}
 	
-	@Override
-	public String setName(String name) {
+	public void setName(String name) {
 		// TODO Auto-generated method stub
 		this.name = name;
 	}
