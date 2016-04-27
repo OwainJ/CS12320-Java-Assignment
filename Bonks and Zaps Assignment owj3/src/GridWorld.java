@@ -25,7 +25,7 @@ public class GridWorld {
 		bonks = new ArrayList<Bonk>();
 		bonkBabies = new ArrayList<Bonk>();
 		zaps = new ArrayList<Zap>();
-		System.out.println("GridWorld Generated!");
+		System.out.println("GridWorld of size [" + GRID_WORLD_X_VALUE + ", " + GRID_WORLD_Y_VALUE + "] Generated!");
 		
 	}
 	
@@ -107,18 +107,7 @@ public class GridWorld {
 				+ "\n GRID_WORLD_Y_VALUE= " + GRID_WORLD_Y_VALUE
 				+ "\n gridWorld= " + Arrays.toString(gridWorld) 
 				+ "\n bonks= " + bonks 
-				+ "\n zaps= " + zaps;
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+				+ "\n zaps= " + zaps;		
 	}
 	
 	public String gridWorldState() {
