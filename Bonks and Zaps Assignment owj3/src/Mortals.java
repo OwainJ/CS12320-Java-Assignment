@@ -1,10 +1,8 @@
-import java.util.Random;
 
 public class Mortals {
 	Movement movement = new Movement();
 	int gridWorldX; //Column
 	int gridWorldY; //Row
-	Random rand;
 
 	public Mortals() {
 
@@ -16,7 +14,7 @@ public class Mortals {
 		Position newPosition;
 		int choice;
 		
-		choice = randomInt(8);
+		choice = Utilities.randomInt(8);
 		switch (choice) {
 		
 		case 0:
@@ -56,11 +54,4 @@ public class Mortals {
 				return p;
 		}
 	}
-	
-	public int randomInt(int r) {
-		rand = new Random();
-		int a = rand.nextInt(r);
-		return a;
-	}
-
 }

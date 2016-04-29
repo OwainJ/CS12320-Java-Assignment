@@ -47,35 +47,26 @@ public class Application {
 			switch (choice) {
 
 			case "1":
-				gameEngine.createGridworld(gridWorldX, gridWorldY);
-				isGridWorldGenerated = true;
+				createGridWorld();
 				break;
 
 			case "2":
-				System.out.println("Creating " + bonkStartPopulation + " Bonk's and " + zapStartPopulation + " Zap's");
-				gameEngine.populateWithBonks(bonkStartPopulation);
-				gameEngine.populateWithZaps(zapStartPopulation);
-				hasBeingsSpawned = true;
+				startGridWorld();
 				break;
 
 			case "3":
-				gameEngine.setMaxDayCount(maxDayCount);
-				gameEngine.startSimulation();
-				break;
-
-			case "4":
 				changeSettings();
 				break;
 
-			case "5":
+			case "4":
 				resetSimulation();
 				break;
 
-			case "6":
+			case "5":
 				printCurrentSettings();
 				break;
 
-			case "7":
+			case "6":
 				printGridWorld();
 				break;
 
@@ -91,10 +82,33 @@ public class Application {
 
 	public void printMenu() {
 		// TODO Auto-generated method stub
-		System.out.println("\n ===Main Menu=== " + "\n 1	- Create GridWorld " + "\n 2	- Populate with Bonks "
-				+ "\n 3	- Start Simulation " + "\n 4	- Change Settings " + "\n 5	- Reset GridWorld to defaults "
-				+ "\n 6	- Display current settings " + "\n Q	- Quit" + "\n ===============");
-
+		System.out.println("\n ===Main Menu=== " 
+				+ "\n 1	- Generate GridWorld "
+				+ "\n 2	- Start Simulation " 
+				+ "\n 3	- Change Settings " 
+				+ "\n 4	- Reset GridWorld to defaults "
+				+ "\n 5	- Display current settings " 
+				+ "\n Q	- Quit" + "\n ===============");
+	}
+	
+	private void createGridWorld() {
+		gameEngine.createGridworld(gridWorldX, gridWorldY);
+		isGridWorldGenerated = true;
+		
+		System.out.println("Creating " + bonkStartPopulation + " Bonk's and " + zapStartPopulation + " Zap's");
+		gameEngine.populateWithBonks(bonkStartPopulation);
+		gameEngine.populateWithZaps(zapStartPopulation);
+		hasBeingsSpawned = true;
+	}
+	
+	private void startGridWorld() throws CannotActException, InterruptedException {
+		if (isGridWorldGenerated == true && hasBeingsSpawned == true) {
+		gameEngine.setMaxDayCount(maxDayCount);
+		gameEngine.startSimulation();
+		} else {
+			System.err.println("ERROR - GridWorld and/or Beings have not been created.");
+			return;
+		}
 	}
 
 	private void printGridWorld() {
@@ -117,9 +131,9 @@ public class Application {
 
 		System.out.print("	Beings = ");
 		if (hasBeingsSpawned == true) {
-			System.out.println(" Created ");
+			System.out.print(" Generated ");
 		} else {
-			System.out.println(" Not Created ");
+			System.out.print(" Not Generated ");
 		}
 	}
 

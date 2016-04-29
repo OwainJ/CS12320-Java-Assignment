@@ -14,6 +14,10 @@ public class GameEngine {
 	int dayCount = 0;
 	int maxDayCount;
 
+	int bonkPopulation;
+	int bonkStartPopulation;
+	int bonksBorn;
+
 	public GameEngine() {
 
 	}
@@ -25,6 +29,7 @@ public class GameEngine {
 	}
 
 	public void populateWithBonks(int bonkStartPop) {
+		bonkStartPopulation = bonkStartPop;
 		Position position;
 		int x;
 		int y;
@@ -36,16 +41,18 @@ public class GameEngine {
 
 			while (counter >= 0) {
 				nameGen = "B" + nameCount;
-				x = randomInt(gridWorldX);
-				y = randomInt(gridWorldY);
+				x = Utilities.randomInt(gridWorldX);
+				y = Utilities.randomInt(gridWorldY);
 
 				position = new Position(x, y);
 
 				Gender gender = randomGender();
 
-				Bonk bonk = new Bonk(nameGen, position, true, gender, gridWorldX, gridWorldY);
+				Bonk bonk = new Bonk(nameGen, position, true, gender,
+						gridWorldX, gridWorldY);
 				nameCount++;
 				counter--;
+				bonkPopulation++;
 
 				gridWorld.addBonk(bonk);
 				System.out.print("Created Bonk: ");
@@ -57,8 +64,9 @@ public class GameEngine {
 			}
 			return;
 		}
-		System.err.println("ERROR! GridWorld has not been created!"
-				+ "\n Please select option '1' on the menu to create a GridWorld ");
+		System.err
+				.println("ERROR! GridWorld has not been created!"
+						+ "\n Please select option '1' on the menu to create a GridWorld ");
 
 	}
 
@@ -74,8 +82,8 @@ public class GameEngine {
 
 			while (counter >= 0) {
 				nameGen = "Z" + nameCount;
-				x = randomInt(gridWorldX);
-				y = randomInt(gridWorldY);
+				x = Utilities.randomInt(gridWorldX);
+				y = Utilities.randomInt(gridWorldY);
 
 				position = new Position(x, y);
 
@@ -91,8 +99,9 @@ public class GameEngine {
 			}
 			return;
 		}
-		System.err.println("ERROR! GridWorld has not been created!"
-				+ "\n Please select option '1' on the menu to create a GridWorld ");
+		System.err
+				.println("ERROR! GridWorld has not been created!"
+						+ "\n Please select option '1' on the menu to create a GridWorld ");
 
 	}
 
@@ -100,15 +109,9 @@ public class GameEngine {
 		maxDayCount = count;
 	}
 
-	public int randomInt(int r) {
-		rand = new Random();
-		int a = rand.nextInt(r);
-		return a;
-	}
-
 	public Gender randomGender() {
 		int choice;
-		choice = randomInt(2);
+		choice = Utilities.randomInt(2);
 
 		switch (choice) {
 		case 0:
@@ -120,7 +123,8 @@ public class GameEngine {
 			return gen2;
 
 		default:
-			System.err.println("ERROR on randomGender() method of GameEngine class");
+			System.err
+					.println("ERROR on randomGender() method of GameEngine class");
 			return null;
 		}
 	}
@@ -138,7 +142,8 @@ public class GameEngine {
 
 	}
 
-	public void startSimulation() throws CannotActException, InterruptedException {
+	public void startSimulation() throws CannotActException,
+			InterruptedException {
 		if (gridWorld != null) {
 
 			System.out.println("=====SIMULATION STARTED=====");
@@ -153,13 +158,24 @@ public class GameEngine {
 
 				Thread.sleep(1000);
 			}
-			if (dayCount == 0) {
-				System.out.println("=====SIMULATION FINISHED=====");
-				return;
-			}
+			System.out.println("=====SIMULATION FINISHED=====");
+			afterSimulationReport();
+			return;
 		} else {
 			System.err.println("ERROR GridWorld not created, cannot start simulation");
 		}
+	}
+
+	public void afterSimulationReport() {
+		int dbonks = countDeadBonks();
+		int abonks = (bonkPopulation - dbonks);
+		System.out.println("\n" + "====Post Simulation Report====");
+		System.out.println("Simulation length:		 " + maxDayCount + " days"
+				+ "\n" + "Starting Bonk population:	 " + bonkStartPopulation
+				+ "\n" + "Number of new Bonks born:	 " + bonksBorn
+				+ "\n" + "Number of Bonks still alive:	 " + abonks 
+				+ "\n" + "Number of deceased Bonks:	 " + dbonks);
+		System.out.println("===============================");
 
 	}
 
@@ -173,6 +189,7 @@ public class GameEngine {
 				if (newBabyBonk != null) {
 					gridWorld.addBonkBaby(newBabyBonk);
 					babiesToAdd = true;
+					bonksBorn++;
 				}
 			}
 		}
@@ -189,6 +206,7 @@ public class GameEngine {
 		if (babiesToAdd == true) {
 			for (Bonk bBaby : gridWorld.getBonkBabies()) {
 				gridWorld.addBonk(bBaby);
+				bonkPopulation++;
 			}
 			gridWorld.clearBonkBabies();
 			babiesToAdd = false;
@@ -205,7 +223,8 @@ public class GameEngine {
 		Position bonkPos;
 		Position zapPos;
 
-		posMaxCount = new Position(gridWorld.getGRID_WORLD_X_VALUE(), gridWorld.getGRID_WORLD_Y_VALUE());
+		posMaxCount = new Position(gridWorld.getGRID_WORLD_X_VALUE(),
+				gridWorld.getGRID_WORLD_Y_VALUE());
 		posCount = new Position(0, 0);
 
 		while (posCount.getColumnValue() <= posMaxCount.getColumnValue()
@@ -218,7 +237,8 @@ public class GameEngine {
 				bonkPos = b.getLocation();
 
 				if (bonkPos.getRowValue() == posCount.getRowValue()
-						&& bonkPos.getColumnValue() == posCount.getColumnValue()) {
+						&& bonkPos.getColumnValue() == posCount
+								.getColumnValue()) {
 					System.out.print(b.getName() + ", ");
 				}
 			}
@@ -244,5 +264,15 @@ public class GameEngine {
 		}
 		return;
 
+	}
+
+	public int countDeadBonks() {
+		int count = 0;
+		for (Bonk b : gridWorld.getBonks()) {
+			if (b.getIsBonkDead() == true) {
+				count++;
+			}
+		}
+		return count;
 	}
 }
