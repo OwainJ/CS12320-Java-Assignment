@@ -1,6 +1,12 @@
-import java.util.Scanner;
+/**
+ * Controls the menu system, settings and the initiating of the game.
+ * 
+ * @author Owain Jones
+ * @version 1.0
+ *
+ */
 
-//DOIT
+import java.util.Scanner;
 
 public class Application {
 

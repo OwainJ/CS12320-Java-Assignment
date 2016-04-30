@@ -1,16 +1,10 @@
 import java.util.ArrayList;
 
 public class Bonk extends Mortals implements Being {
-	private String name; //stores bonk's name
-	private Position position; //stores bonk's position
 	private Boolean isBonkDead; //checks if bonk is dead
 	private Boolean isBonkAdult; //checks if bonk is an adult
 	private Boolean hasReproduced; //checks if bonk has reproduced this cycle
 	private int countUntilAdult = 1; //waits one cycle until Bonk becomes adult and can start breeding
-	private Gender gender; //stores bonk's gender
-	
-	private int gridWorldX; //Column
-	private int gridWorldY; //Row
 
 	public Bonk(String newName, Position p, Boolean age, Gender g, int X, int Y) {
 		name = newName;
