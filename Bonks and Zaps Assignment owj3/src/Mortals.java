@@ -23,11 +23,11 @@ public class Mortals {
 	/**
 	 * This movement method chooses a random direction to move
 	 * then calls the appropriate method from the Movement class.
-	 * It takes inputs gridWorlds X and Y and the mortal's current position
+	 * It takes inputs GridWorlds X and Y and the mortal's current Position
 	 * then passes them into the appropriate method in Movement.
 	 * 
 	 * To pick a random direction it utilises the randomInt() method
-	 * in the utilities class.
+	 * in the Utilities class.
 	 * 
 	 * @param p
 	 * @param X
