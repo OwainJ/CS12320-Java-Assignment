@@ -1,6 +1,12 @@
-import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Controls the entire game,l how it runs and all that jazz.
+ * 
+ * @author Owain Jones
+ * @version 1.0
+ * 
+ */
 public class GameEngine {
 	GridWorld gridWorld;
 	Random rand;
@@ -15,17 +21,42 @@ public class GameEngine {
 	int dayCount = 0;
 	int maxDayCount;
 
+	int bonkPopulation;
+	int bonkStartPopulation;
+	int bonksBorn;
+	
+	int zapStartPopulation;
+
+	/**
+	 * Creates a new GameEngine object
+	 */
 	public GameEngine() {
 
 	}
 
+	/**
+	 * Creates a new GridWorld object.
+	 * Passes in the X and Y of the gridWorld as int's.
+	 * 
+	 * @param i
+	 * @param j
+	 */
 	public void createGridworld(int i, int j) {
 		gridWorld = new GridWorld(i, j);
 		gridWorldX = i;
 		gridWorldY = j;
 	}
 
+	/**
+	 * This method populates the gridWorld with a specified amount of Bonks.
+	 * The amount of Bonks created is dictated by the int that is passed in.
+	 * The Bonk's location and Gender are all randomly assigned.
+	 * 
+	 * @param bonkStartPop
+	 * @return Returns an error if gridWorld has not been created.
+	 */
 	public void populateWithBonks(int bonkStartPop) {
+		bonkStartPopulation = bonkStartPop;
 		Position position;
 		int x;
 		int y;
@@ -37,16 +68,18 @@ public class GameEngine {
 
 			while (counter >= 0) {
 				nameGen = "B" + nameCount;
-				x = randomInt(gridWorldX);
-				y = randomInt(gridWorldY);
+				x = Utilities.randomInt(gridWorldX);
+				y = Utilities.randomInt(gridWorldY);
 
 				position = new Position(x, y);
 
-				Gender gender = randomGender();
+				Gender gender = Utilities.randomGender();
 
-				Bonk bonk = new Bonk(nameGen, position, true, gender, gridWorldX, gridWorldY);
+				Bonk bonk = new Bonk(nameGen, position, true, gender,
+						gridWorldX, gridWorldY);
 				nameCount++;
 				counter--;
+				bonkPopulation++;
 
 				gridWorld.addBonk(bonk);
 				System.out.print("Created Bonk: ");
@@ -59,11 +92,20 @@ public class GameEngine {
 			return;
 		}
 		System.err.println("ERROR! GridWorld has not been created!"
-				+ "\n Please select option '1' on the menu to create a GridWorld ");
+						+ "\n Please select option '1' on the menu to create a GridWorld ");
 
 	}
 
+	/**
+	 * This method populates the gridWorld with a specified amount of Zaps.
+	 * The amount of Zaps created is dictated by the int that is passed in.
+	 * The Zap's location are randomly assigned.
+	 * 
+	 * @param zapStartPop
+	 * @return Returns an error if gridWorld has not been created.
+	 */
 	public void populateWithZaps(int zapStartPop) {
+		zapStartPopulation = zapStartPop;
 		Position position;
 		int x;
 		int y;
@@ -75,8 +117,8 @@ public class GameEngine {
 
 			while (counter >= 0) {
 				nameGen = "Z" + nameCount;
-				x = randomInt(gridWorldX);
-				y = randomInt(gridWorldY);
+				x = Utilities.randomInt(gridWorldX);
+				y = Utilities.randomInt(gridWorldY);
 
 				position = new Position(x, y);
 
@@ -92,42 +134,28 @@ public class GameEngine {
 			}
 			return;
 		}
-		System.err.println("ERROR! GridWorld has not been created!"
-				+ "\n Please select option '1' on the menu to create a GridWorld ");
+		System.err
+				.println("ERROR! GridWorld has not been created!"
+						+ "\n Please select option '1' on the menu to create a GridWorld ");
 
 	}
 
+	/**
+	 * Sets the maximum day count of the gridWorld. aka the amount of cycles the game
+	 * runs through until it stops.
+	 * 
+	 * @param count
+	 */
 	public void setMaxDayCount(int count) {
 		maxDayCount = count;
 	}
 
-	public int randomInt(int r) {
-		rand = new Random();
-		int a = rand.nextInt(r);
-		return a;
-	}
-
-	public Gender randomGender() {
-		int choice;
-		choice = randomInt(2);
-
-		switch (choice) {
-		case 0:
-			Gender gen = Gender.MALE;
-			return gen;
-
-		case 1:
-			Gender gen2 = Gender.FEMALE;
-			return gen2;
-
-		default:
-			System.err.println("ERROR on randomGender() method of GameEngine class");
-			return null;
-		}
-	}
-
 	// ///////////////////SIMULATION CODE PAST THIS LINE/////////////////////
 
+	/**
+	 * This completely clears GridWorld by emptying it from Beings
+	 * and resetting it's max size to 0. 
+	 */
 	public void resetSimulation() {
 		gridWorld = null;
 		bonk = null;
@@ -139,7 +167,15 @@ public class GameEngine {
 
 	}
 
-	public void startSimulation() throws CannotActException, InterruptedException {
+	/**
+	 * This methods starts, runs and controls the simulation for ever how many
+	 * cycles have been dictated in maxDayCount.
+	 * 
+	 * @throws CannotActException
+	 * @throws InterruptedException
+	 */
+	public void startSimulation() throws CannotActException,
+			InterruptedException {
 		if (gridWorld != null) {
 
 			System.out.println("=====SIMULATION STARTED=====");
@@ -154,16 +190,43 @@ public class GameEngine {
 
 				Thread.sleep(1000);
 			}
-			if (dayCount == 0) {
-				System.out.println("=====SIMULATION FINISHED=====");
-				return;
-			}
+			System.out.println("=====SIMULATION FINISHED=====");
+			afterSimulationReport();
+			return;
 		} else {
 			System.err.println("ERROR GridWorld not created, cannot start simulation");
 		}
+	}
+
+	/**
+	 * This method generates and prints a report on how the previous simulation went.
+	 * It reports the GridWorld size, how many days (cycles) passed, how many Bonk(s) and Zap(s)
+	 * started, how many Bonk(s) where born, how many Bonk(s) died and how many Bonk(s) where still
+	 * alive at the end of the simulation.
+	 * 
+	 *  @return Returns a report on how the simulation went.
+	 */
+	public void afterSimulationReport() {
+		int dbonks = countDeadBonks();
+		int abonks = (bonkPopulation - dbonks);
+		System.out.println("\n" + "====Post Simulation Report====");
+		System.out.println("Simulation length:		 " + maxDayCount + " days"
+				+ "\n" + "GridWorld size: 		 " + "[" + gridWorldX + "," + gridWorldY + "]"
+				+ "\n" + "Starting Zap population:	 " + zapStartPopulation
+				+ "\n" + "Starting Bonk population:	 " + bonkStartPopulation
+				+ "\n" + "Number of new Bonks born:	 " + bonksBorn
+				+ "\n" + "Number of Bonks still alive:	 " + abonks 
+				+ "\n" + "Number of deceased Bonks:	 " + dbonks);
+		System.out.println("===============================");
 
 	}
 
+	/**
+	 * Controls the how the Bonk(s) act.
+	 * Calls their act() and reproduction methods.
+	 * 
+	 * @throws CannotActException
+	 */
 	private void actBonks() throws CannotActException {
 		Bonk newBabyBonk;
 		for (Bonk b : gridWorld.getBonks()) {
@@ -174,11 +237,18 @@ public class GameEngine {
 				if (newBabyBonk != null) {
 					gridWorld.addBonkBaby(newBabyBonk);
 					babiesToAdd = true;
+					bonksBorn++;
 				}
 			}
 		}
 	}
 
+	/**
+	 * Control's how the Zap(s) act during a cycle.
+	 * Calls their act() and kill() methods.
+	 * 
+	 * @throws CannotActException
+	 */
 	private void actZaps() throws CannotActException {
 		for (Zap z : gridWorld.getZaps()) {
 			z.act();
@@ -186,27 +256,39 @@ public class GameEngine {
 		}
 	}
 
+	/**
+	 * This methods populates GridWorld with all of the new Baby Bonks that have been
+	 * born in the last cycle. It then clears the babiesToAdd array.
+	 */
 	private void populateNewBonkBabies() {
 		if (babiesToAdd == true) {
 			for (Bonk bBaby : gridWorld.getBonkBabies()) {
 				gridWorld.addBonk(bBaby);
+				bonkPopulation++;
 			}
 			gridWorld.clearBonkBabies();
 			babiesToAdd = false;
 		}
 	}
 
+	/**
+	 * This method prints out the state of GridWorld at the end of each cycle.
+	 * It print's what day (cycle) it is on and then the position of
+	 * all of the Bonk(s) and Zap(s) in GridWorld
+	 * 
+	 *  @return prints out the state of GridWorld
+	 */
 	private void printGridWorldState() {
 
 		System.out.println("===== Day: " + dayCount + " =====");
-		gridWorld.gridWorldState();
 
 		Position posMaxCount;
 		Position posCount;
 		Position bonkPos;
 		Position zapPos;
 
-		posMaxCount = new Position(gridWorld.getGRID_WORLD_X_VALUE(), gridWorld.getGRID_WORLD_Y_VALUE());
+		posMaxCount = new Position(gridWorld.getGRID_WORLD_X_VALUE(),
+				gridWorld.getGRID_WORLD_Y_VALUE());
 		posCount = new Position(0, 0);
 
 		while (posCount.getColumnValue() <= posMaxCount.getColumnValue()
@@ -219,7 +301,8 @@ public class GameEngine {
 				bonkPos = b.getLocation();
 
 				if (bonkPos.getRowValue() == posCount.getRowValue()
-						&& bonkPos.getColumnValue() == posCount.getColumnValue()) {
+						&& bonkPos.getColumnValue() == posCount
+								.getColumnValue()) {
 					System.out.print(b.getName() + ", ");
 				}
 			}
@@ -245,5 +328,21 @@ public class GameEngine {
 		}
 		return;
 
+	}
+
+	/**
+	 * This method is used to count the amount
+	 * of Bonk(s) that have died in GridWorld.
+	 * 
+	 * @return the number of dead Bonk(s) as an int
+	 */
+	public int countDeadBonks() {
+		int count = 0;
+		for (Bonk b : gridWorld.getBonks()) {
+			if (b.getIsBonkDead() == true) {
+				count++;
+			}
+		}
+		return count;
 	}
 }
