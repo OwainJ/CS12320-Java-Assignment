@@ -1,6 +1,7 @@
 #title {
 	-fx-font-size: 10;
 	-fx-font-family: "Ariel Black";
+	-fx-text-alignment: center;
 }
 
 #btnlabel {
