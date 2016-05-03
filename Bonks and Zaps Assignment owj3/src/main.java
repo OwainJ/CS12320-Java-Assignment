@@ -135,7 +135,7 @@ public class main extends Application {
 
 		Scene scene = new Scene(borderPane);
 		
-		//scene.getStylesheets().add(GameApplication.class.getResource("styling.css").toExternalForm());
+		scene.getStylesheets().add(GameApplication.class.getResource("styling.css").toExternalForm());
 		
 		stage.setScene(scene);
 		stage.setOnCloseRequest(e->{doRun = false; Platform.exit();});
