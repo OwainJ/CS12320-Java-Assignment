@@ -1,3 +1,7 @@
+.background {
+    -fx-background-color: #1d1d1d;
+}
+
 #title {
 	-fx-font-size: 10;
 	-fx-font-family: "Ariel Black";
