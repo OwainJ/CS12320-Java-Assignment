@@ -1,4 +1,22 @@
 import java.util.Scanner;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 /**
  * Controls the menu system, settings and the initiation of the game and GameEngine.
@@ -7,7 +25,10 @@ import java.util.Scanner;
  * @version 1.0
  *
  */
-public class Application {
+public class GameApplication extends Application {
+	
+	private Label[] labels = new Label[5];
+	private boolean doRun;
 
 	GameEngine gameEngine = new GameEngine();
 
@@ -35,16 +56,104 @@ public class Application {
 	 * @throws InterruptedException
 	 */
 	public static void main(String[] args) throws CannotActException, InterruptedException {
-		// gridWorld.startGame(); //could use this to start
-		Application app = new Application();
-		app.callMenu();
-
+		
+		launch(args);
+		//GameApplication app = new Application();
+		//app.callMenu();
+	}
+	
+	@Override
+	public void start(Stage stage) throws Exception {
+		Border border = new Border(new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1)));
+		BorderPane borderPane = new BorderPane();
+		borderPane.setPadding(new Insets(25,25,25,25)); 
+		stage.setTitle("*****CS12320 INDIVIDUAL ASSIGNMENT - OWAIN JONES - owj3@aber.ac.uk*****");
+		
+		
+		labels[2] = new Label(); //right
+		labels[2].setPrefSize(100, 700);
+		labels[2].setBorder(border);
+		
+		
+		labels[3] = new Label(); //left
+		labels[3].setPrefSize(100, 700);
+		labels[3].setBorder(border);
+	
+		borderPane.setRight(labels[2]);
+		borderPane.setLeft(labels[3]);
+		
+		///////Top Title Panel///////
+		VBox titlePanel = new VBox();
+		
+		Label title = new Label("***** BONKS AND ZAPS SIMULATION *****"); //top
+		title.setPrefSize(810, 20);
+		//labels[0].setBorder(border);
+		
+		Label subTitle = new Label("*****CS12320 INDIVIDUAL ASSIGNMENT - OWAIN JONES - owj3@aber.ac.uk*****"); //top
+		subTitle.setPrefSize(810, 20);
+		//labels[1].setBorder(border);
+		
+		titlePanel.getChildren().add(title);
+		titlePanel.getChildren().add(subTitle);
+		
+		title.setId("title");
+		subTitle.setId("title");
+		
+		borderPane.setTop(titlePanel);	
+		/////////////////////////////
+		
+		
+		/////Bottom Button Panel/////
+		HBox buttonPanel = new HBox();
+		Button startSimulation = new Button("Start Simulation");
+		startSimulation.setOnAction(e -> printMenu());
+		startSimulation.setPrefSize(120,50);
+		startSimulation.setId("btnlabel");
+		Button pauseSimulation = new Button("Pause Simulation");
+		pauseSimulation.setOnAction(e -> printMenu());
+		pauseSimulation.setPrefSize(120,50);
+		Button changeSettings = new Button("Change Settings");
+		changeSettings.setOnAction(e -> printMenu());
+		changeSettings.setPrefSize(120,50);
+		Button reset = new Button("Reset GridWorld to defaults");
+		reset.setOnAction(e -> printMenu());
+		reset.setPrefSize(170,50);
+		Button displaySettings = new Button("Display current settings");
+		displaySettings.setOnAction(e -> printMenu());
+		displaySettings.setPrefSize(160,50);
+		Button quit = new Button("Quit");
+		quit.setOnAction(e -> printMenu());
+		quit.setPrefSize(120,50);
+			
+		buttonPanel.getChildren().add(startSimulation);
+		buttonPanel.getChildren().add(pauseSimulation);
+		buttonPanel.getChildren().add(changeSettings);
+		buttonPanel.getChildren().add(reset);
+		buttonPanel.getChildren().add(displaySettings);
+		buttonPanel.getChildren().add(quit);
+		
+		borderPane.setBottom(buttonPanel);
+		/////////////////////////////
+		
+		Scene scene = new Scene(borderPane);
+		stage.setScene(scene);
+		
+		scene.getStylesheets().add(GameApplication.class.getResource("styling.css").toExternalForm());
+		
+		stage.setOnCloseRequest(e->{doRun = false; Platform.exit();});
+		
+		stage.setMaxWidth(1000);
+		stage.setMaxHeight(700);
+		
+		stage.show();	
+			
+		
 	}
 
 	/**
 	 * Constructor for Application that creates a new Scanner.
 	 */
-	public Application() {
+	public GameApplication() {
 		in = new Scanner(System.in);
 	}
 
