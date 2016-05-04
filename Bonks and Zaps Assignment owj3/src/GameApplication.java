@@ -294,6 +294,61 @@ public class GameApplication {
 		hasBeingsSpawned = false;
 		isGridWorldGenerated = false;
 	}
+	
+	
+
+	public int getBonkStartPopulation() {
+		return bonkStartPopulation;
+	}
+
+	public void setBonkStartPopulation(int bonkStartPopulation) {
+		this.bonkStartPopulation = bonkStartPopulation;
+	}
+
+	public int getZapStartPopulation() {
+		return zapStartPopulation;
+	}
+
+	public void setZapStartPopulation(int zapStartPopulation) {
+		this.zapStartPopulation = zapStartPopulation;
+	}
+
+	public int getGridWorldX() {
+		return gridWorldX;
+	}
+
+	public void setGridWorldX(int gridWorldX) {
+		this.gridWorldX = gridWorldX;
+	}
+
+	public int getGridWorldY() {
+		return gridWorldY;
+	}
+
+	public void setGridWorldY(int gridWorldY) {
+		this.gridWorldY = gridWorldY;
+	}
+	
+	public String getGridWorldXY(){
+		String xy = "[" + getGridWorldX() + ", " + getGridWorldY() + "]";
+		return xy;
+	}
+
+	public int getMaxDayCount() {
+		return maxDayCount;
+	}
+
+	public void setMaxDayCount(int maxDayCount) {
+		this.maxDayCount = maxDayCount;
+	}
+
+	public String getSettingsName() {
+		return settingsName;
+	}
+
+	public void setSettingsName(String settingsName) {
+		this.settingsName = settingsName;
+	}
 
 	/**
 	 * This method exit's the program.
