@@ -102,14 +102,19 @@ public class GameApplication {
 		} while (!choice.equals("Q"));
 	}
 	
+	/**
+	 * This method is used by the GUI. When a GUI menu button is pressed it passes an int to this
+	 * method which then activates the corresponding option.
+	 * 
+	 * @param choice
+	 * @throws CannotActException
+	 * @throws InterruptedException
+	 */
 	public void guiMenuSelector(String choice) throws CannotActException, InterruptedException {
-
 			switch (choice) {
-
 			case "1":
 				createGridWorld();
 				return;
-
 			case "2":
 				try {
 					startGridWorld();
@@ -118,29 +123,21 @@ public class GameApplication {
 					e.printStackTrace();
 				}
 				return;
-
 			case "3":
 				changeSettings();
 				return;
-
 			case "4":
 				resetSimulation();
 				return;
-
-
 			case "5":
 				printCurrentSettings();
 				return;
-
-
 			case "6":
 				printGridWorld();
 				return;
-
 			case "Q":
 				exitProgram();
 				return;
-
 			default:
 				System.err.println("==Not a valid choice==");
 			}  while (!choice.equals("Q"));
@@ -269,6 +266,7 @@ public class GameApplication {
 		zapStartPopulation = in.nextInt();
 		settingsName = "Custom";
 		System.out.println("===Custom Settings Accepted===");
+		return;
 	}
 
 	/**

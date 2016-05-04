@@ -43,12 +43,12 @@ public class main extends Application {
 
 		// String text = args[0];
 
-		// if (text == "-t") {
-		//GameApplication app = new GameApplication();
-		//app.callMenu();
-		// } else {
-		launch(args);
-		// }
+		//if (text == "-t") {
+		 GameApplication app = new GameApplication();
+		 app.callMenu();
+		//} else {
+		 //launch(args);
+		//}
 	}
 
 	public void start(Stage stage) throws CannotActException, InterruptedException, Exception {
@@ -99,22 +99,28 @@ public class main extends Application {
 		startSimulation.setOnAction(e -> menu("2"));
 		startSimulation.setPrefSize(120, 50);
 		startSimulation.setId("btnlabel");
+		
 		Button pauseSimulation = new Button("Pause Simulation");
 		pauseSimulation.setOnAction(e -> stopSimulation());
 		pauseSimulation.setPrefSize(120, 50);
+		
 		Button createGridWorld = new Button("Create GridWorld");
 		createGridWorld.setOnAction(e -> menu("1"));
 		createGridWorld.setPrefSize(120, 50);
 		createGridWorld.setId("btnlabel");
+		
 		Button changeSettings = new Button("Change Settings");
 		changeSettings.setOnAction(e -> menu("3"));
 		changeSettings.setPrefSize(120, 50);
+		
 		Button reset = new Button("Reset GridWorld to defaults");
 		reset.setOnAction(e -> menu("4"));
 		reset.setPrefSize(170, 50);
+		
 		Button displaySettings = new Button("Display current settings");
 		displaySettings.setOnAction(e -> menu("5"));
 		displaySettings.setPrefSize(160, 50);
+		
 		Button quit = new Button("Quit");
 		quit.setOnAction(e -> menu("Q"));
 		quit.setPrefSize(120, 50);
@@ -134,11 +140,11 @@ public class main extends Application {
 		GridPane grid = new GridPane();
 		
 		labels[2] = new Label("Current Settings"); // left
-		labels[2].setPrefSize(100, 80);
+		labels[2].setPrefSize(150, 80);
 		labels[2].setBorder(border);
 		
 		labels[3] = new Label("SettingsName"); // left
-		labels[3].setPrefSize(100, 80);
+		labels[3].setPrefSize(150, 80);
 		labels[3].setBorder(border);
 		
 		labels[4] = new Label("GridWorld Size:"); // left
@@ -204,7 +210,7 @@ public class main extends Application {
 
 		stage.show();
 		
-		updateGUI();
+		updateSettingsGUI();
 	}
 
 	private void stopSimulation() {
@@ -222,8 +228,9 @@ public class main extends Application {
 						public void run() {
 							try {
 								app.guiMenuSelector(choice);
-								updateGUI();
+								updateSettingsGUI();
 								doRun = false;
+								return;
 							} catch (CannotActException | InterruptedException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -240,7 +247,7 @@ public class main extends Application {
 		runGame.start();
 	}
 	
-	private void updateGUI() {
+	private void updateSettingsGUI() {
 		labels[3].setText(app.getSettingsName());
 		labels[5].setText(app.getGridWorldXY());
 		labels[7].setText(String.valueOf(app.getBonkStartPopulation()));
