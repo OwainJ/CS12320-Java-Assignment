@@ -353,6 +353,7 @@ public class GameApplication {
 	 */
 	public void exitProgram() {
 		System.out.println("*** THANK YOU FOR USING BONKS AND ZAPS ***");
+		System.exit(0);
 	}
 
 }
