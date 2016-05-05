@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * @version 1.0
  * 
  */
-public class Zap extends Mortals implements Being {
+public class Zap extends Immortals implements Being {
 	private String name; //stores zap's name
 	private Position position; //stores zap's position
 	
