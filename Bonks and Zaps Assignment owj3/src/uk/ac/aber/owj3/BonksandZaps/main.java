@@ -1,3 +1,4 @@
+package uk.ac.aber.owj3.BonksandZaps;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.HPos;
@@ -20,6 +21,7 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import uk.ac.aber.owj3.BonksandZaps.utilities.CannotActException;
 
 /**
  * This main class starts the program and also controls all of the GUI. If the

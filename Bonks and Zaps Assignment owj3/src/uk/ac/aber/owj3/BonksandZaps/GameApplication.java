@@ -1,6 +1,8 @@
+package uk.ac.aber.owj3.BonksandZaps;
 import java.util.Scanner;
 
 import javafx.application.Platform;
+import uk.ac.aber.owj3.BonksandZaps.utilities.CannotActException;
 
 /**
  * Controls the menu system, settings and the initiation of the game and GameEngine.
@@ -69,11 +71,11 @@ public class GameApplication {
 			switch (choice) {
 
 			case "1":
-				createGridWorld();
+				startGridWorld();
 				break;
 
 			case "2":
-				startGridWorld();
+				createGridWorld();
 				break;
 
 			case "3":
@@ -149,8 +151,8 @@ public class GameApplication {
 	 */
 	public void printMenu() {
 		System.out.println("\n ===Main Menu=== " 
-				+ "\n 1	- Generate GridWorld "
-				+ "\n 2	- Start Simulation " 
+				+ "\n 1	- Start Simulation "
+				+ "\n 2	- Generate GridWorld " 
 				+ "\n 3	- Change Settings " 
 				+ "\n 4	- Reset GridWorld to defaults "
 				+ "\n 5	- Display current settings " 

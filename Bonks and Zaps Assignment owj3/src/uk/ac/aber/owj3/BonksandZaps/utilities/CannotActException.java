@@ -1,3 +1,4 @@
+package uk.ac.aber.owj3.BonksandZaps.utilities;
 /**
  * Describes the CannotActExcepton
  * 

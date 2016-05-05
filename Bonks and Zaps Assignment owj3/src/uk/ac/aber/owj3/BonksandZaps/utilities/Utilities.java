@@ -1,4 +1,7 @@
+package uk.ac.aber.owj3.BonksandZaps.utilities;
 import java.util.Random;
+
+import uk.ac.aber.owj3.BonksandZaps.beings.Gender;
 
 /**
  * This Utilities class contains frequently used methods that are used by

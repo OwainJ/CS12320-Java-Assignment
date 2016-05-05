@@ -1,3 +1,7 @@
+package uk.ac.aber.owj3.BonksandZaps.beings;
+
+import uk.ac.aber.owj3.BonksandZaps.utilities.CannotActException;
+
 /**
  * Represents an inhabitant of GridWorld
  * 

@@ -1,3 +1,4 @@
+package uk.ac.aber.owj3.BonksandZaps.beings;
 /**
  * This class stores and controls the position of Being(s) in GridWorld
  * 

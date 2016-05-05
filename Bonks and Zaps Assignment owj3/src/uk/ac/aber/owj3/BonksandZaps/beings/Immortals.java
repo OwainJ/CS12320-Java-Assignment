@@ -1,3 +1,7 @@
+package uk.ac.aber.owj3.BonksandZaps.beings;
+
+import uk.ac.aber.owj3.BonksandZaps.utilities.Utilities;
+
 /**
  * Super Class for all immortals in the game.
  * Controls their movement and gives them basic requires parameters.

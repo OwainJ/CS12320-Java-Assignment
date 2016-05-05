@@ -1,4 +1,7 @@
+package uk.ac.aber.owj3.BonksandZaps.beings;
 import java.util.ArrayList;
+
+import uk.ac.aber.owj3.BonksandZaps.utilities.CannotActException;
 
 /**
  * Represents a Bonk that is a Being

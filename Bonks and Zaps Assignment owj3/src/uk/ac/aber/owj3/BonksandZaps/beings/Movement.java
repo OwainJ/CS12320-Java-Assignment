@@ -1,3 +1,4 @@
+package uk.ac.aber.owj3.BonksandZaps.beings;
 /**
  * Controls the movement of Being(s) in GridWorld
  * 
