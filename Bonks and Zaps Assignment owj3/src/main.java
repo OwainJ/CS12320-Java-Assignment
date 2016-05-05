@@ -23,9 +23,8 @@ import javafx.stage.Stage;
 
 /**
  * This main class starts the program and also controls all of the GUI.
- * If the program is launched with the "-t" argument then control is handed
- * stright to the GameApplication class, which will then run a text only version
- * of the game
+ * If the program is launched with the "-gui" argument, then this runs the methods
+ * in this class which will run a GUI version of the game.
  * 
  * @author Owain Jones
  * @version 1.0
@@ -43,11 +42,11 @@ public class main extends Application {
 
 		// String text = args[0];
 
-		//if (text == "-t") {
-		 GameApplication app = new GameApplication();
-		 app.callMenu();
+		//if (text == "-gui") {
+		 	//launch(args);
 		//} else {
-		 //launch(args);
+			GameApplication app = new GameApplication();
+			app.callMenu();
 		//}
 	}
 
