@@ -1,7 +1,15 @@
+package uk.ac.aber.owj3.BonksandZaps;
 import java.util.Random;
 
+import uk.ac.aber.owj3.BonksandZaps.beings.Bonk;
+import uk.ac.aber.owj3.BonksandZaps.beings.Gender;
+import uk.ac.aber.owj3.BonksandZaps.beings.Position;
+import uk.ac.aber.owj3.BonksandZaps.beings.Zap;
+import uk.ac.aber.owj3.BonksandZaps.utilities.CannotActException;
+import uk.ac.aber.owj3.BonksandZaps.utilities.Utilities;
+
 /**
- * Controls the entire game,l how it runs and all that jazz.
+ * Controls the entire game, how it runs and all that jazz.
  * 
  * @author Owain Jones
  * @version 1.0
@@ -18,13 +26,14 @@ public class GameEngine {
 	int gridWorldX;
 	int gridWorldY;
 
-	int dayCount = 0;
+	int dayCount;
 	int maxDayCount;
 
 	int bonkPopulation;
 	int bonkStartPopulation;
 	int bonksBorn;
 	
+	int zapPopulation;
 	int zapStartPopulation;
 
 	/**
@@ -45,6 +54,12 @@ public class GameEngine {
 		gridWorld = new GridWorld(i, j);
 		gridWorldX = i;
 		gridWorldY = j;
+		dayCount = 0;
+		bonksBorn = 0;
+		bonkPopulation = 0;
+		bonkStartPopulation = 0;
+		zapStartPopulation = 0;
+		zapPopulation  = 0;
 	}
 
 	/**
@@ -57,6 +72,7 @@ public class GameEngine {
 	 */
 	public void populateWithBonks(int bonkStartPop) {
 		bonkStartPopulation = bonkStartPop;
+		bonkPopulation = 0;
 		Position position;
 		int x;
 		int y;
@@ -66,7 +82,7 @@ public class GameEngine {
 			int nameCount = 0;
 			String nameGen;
 
-			while (counter >= 0) {
+			while (counter > 0) {
 				nameGen = "B" + nameCount;
 				x = Utilities.randomInt(gridWorldX);
 				y = Utilities.randomInt(gridWorldY);
@@ -106,6 +122,7 @@ public class GameEngine {
 	 */
 	public void populateWithZaps(int zapStartPop) {
 		zapStartPopulation = zapStartPop;
+		zapPopulation = 0;
 		Position position;
 		int x;
 		int y;
@@ -115,7 +132,7 @@ public class GameEngine {
 			int nameCount = 0;
 			String nameGen;
 
-			while (counter >= 0) {
+			while (counter > 0) {
 				nameGen = "Z" + nameCount;
 				x = Utilities.randomInt(gridWorldX);
 				y = Utilities.randomInt(gridWorldY);
@@ -125,6 +142,7 @@ public class GameEngine {
 				Zap zap = new Zap(nameGen, position, gridWorldX, gridWorldY);
 				nameCount++;
 				counter--;
+				zapPopulation++;
 
 				gridWorld.addZap(zap);
 				System.out.print("Created Zap: ");

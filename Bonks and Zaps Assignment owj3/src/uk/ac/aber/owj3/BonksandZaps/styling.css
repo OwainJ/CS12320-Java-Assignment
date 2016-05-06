@@ -1,0 +1,22 @@
+.background {
+    -fx-background-color: #1d1d1d;
+}
+
+#title {
+	-fx-font-size: 10;
+	-fx-font-family: "Ariel Black";
+	-fx-text-alignment: center;
+}
+
+#btnlabel {
+	-fx-font-weight: bold;
+	-fx-font-family: "Ariel Narrow";
+}
+
+
+.button {
+	-fx-text-fill: white;
+	-fx-font-family: "Arial Narrow";
+	-fx-font-weight: bold;
+	-fx-background-color: linear-gradient(#61a2b1, #2A5058);
+}

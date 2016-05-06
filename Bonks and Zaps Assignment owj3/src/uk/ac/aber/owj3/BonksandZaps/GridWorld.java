@@ -1,5 +1,10 @@
+package uk.ac.aber.owj3.BonksandZaps;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import uk.ac.aber.owj3.BonksandZaps.beings.Being;
+import uk.ac.aber.owj3.BonksandZaps.beings.Bonk;
+import uk.ac.aber.owj3.BonksandZaps.beings.Zap;
 
 /**
  * Represents and controls GridWorld
