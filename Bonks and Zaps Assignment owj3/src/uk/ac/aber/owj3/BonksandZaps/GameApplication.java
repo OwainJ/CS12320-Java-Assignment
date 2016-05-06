@@ -59,8 +59,16 @@ public class GameApplication {
 	 */
 	public void callMenu() throws CannotActException, InterruptedException {
 		String choice;
-		System.out.println("***** BONKS AND ZAPS SIMULATION *****");
-		System.out.println("*****CS12320 INDIVIDUAL ASSIGNMENT - OWAIN JONES - owj3@aber.ac.uk*****");
+		System.out.println("====================================================================================================");
+		System.out.println("__________               __                _____              .___ __________                    "
+						+"\n\\______   \\ ____   ____ |  | __  ______   /  _  \\   ____    __| _/ \\____    /____  ______  ______"
+						+"\n |    |  _//  _ \\ /    \\|  |/ / /  ___/  /  /_\\  \\ /    \\  / __ |    /     /\\__  \\ \\____ \\/  ___/"
+						+"\n |    |   (  <_> )   |  \\    <  \\___ \\  /    |    \\   |  \\/ /_/ |   /     /_ / __ \\|  |_> >___ \\" 
+						+"\n |______  /\\____/|___|  /__|_ \\/____  > \\____|__  /___|  /\\____ |  /_______ (____  /   __/____  >"
+							   +"\n        \\/            \\/     \\/     \\/          \\/     \\/      \\/          \\/    \\/|__|       \\/"
+						+"\n ");
+		System.out.println("		CS12320 INDIVIDUAL ASSIGNMENT - OWAIN JONES - owj3@aber.ac.uk");
+		System.out.println("====================================================================================================");
 		defaultSettings();
 		printCurrentSettings();
 		do {
@@ -150,13 +158,21 @@ public class GameApplication {
 	 * 
 	 */
 	public void printMenu() {
-		System.out.println("\n ===Main Menu=== " 
-				+ "\n 1	- Start Simulation "
+		System.out.println("==========================================================");
+		System.out.println(     " ___  ___      _        ___  ___                 "
+							+ "\n |  \\/  |     (_)       |  \\/  |"                 
+							+ "\n | .  . | __ _ _ _ __   | .  . | ___ _ __  _   _" 
+							+ "\n | |\\/| |/ _` | | '_ \\  | |\\/| |/ _ \\ '_ \\| | | |"
+							+ "\n | |  | | (_| | | | | | | |  | |  __/ | | | |_| |"
+							+ "\n \\_|  |_/\\__,_|_|_| |_| \\_|  |_/\\___|_| |_|\\__,_|");	
+		System.out.println("==========================================================");
+		System.out.println("\n 1	- Start Simulation "
 				+ "\n 2	- Generate GridWorld " 
 				+ "\n 3	- Change Settings " 
 				+ "\n 4	- Reset GridWorld to defaults "
 				+ "\n 5	- Display current settings " 
-				+ "\n Q	- Quit" + "\n ===============");
+				+ "\n Q	- Quit");
+		System.out.println("==========================================================");
 	}
 	
 	/**
@@ -225,9 +241,9 @@ public class GameApplication {
 
 		System.out.print("	Beings = ");
 		if (hasBeingsSpawned == true) {
-			System.out.print(" Generated ");
+			System.out.println(" Generated ");
 		} else {
-			System.out.print(" Not Generated ");
+			System.out.println(" Not Generated ");
 		}
 	}
 
