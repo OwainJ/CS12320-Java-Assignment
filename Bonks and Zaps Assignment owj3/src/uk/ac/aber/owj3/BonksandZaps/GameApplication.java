@@ -166,7 +166,7 @@ public class GameApplication {
 							+ "\n | |  | | (_| | | | | | | |  | |  __/ | | | |_| |"
 							+ "\n \\_|  |_/\\__,_|_|_| |_| \\_|  |_/\\___|_| |_|\\__,_|");	
 		System.out.println("==========================================================");
-		System.out.println("\n 1	- Start Simulation "
+		System.out.println(" 1	- Start Simulation "
 				+ "\n 2	- Generate GridWorld " 
 				+ "\n 3	- Change Settings " 
 				+ "\n 4	- Reset GridWorld to defaults "
@@ -259,8 +259,8 @@ public class GameApplication {
 	public void defaultSettings() {
 		bonkStartPopulation = 20;
 		zapStartPopulation = 5;
-		gridWorldX = 5; // Column
-		gridWorldY = 5; // Row
+		gridWorldX = 20; // Column
+		gridWorldY = 20; // Row
 		maxDayCount = 20;
 		settingsName = "Default";
 	}

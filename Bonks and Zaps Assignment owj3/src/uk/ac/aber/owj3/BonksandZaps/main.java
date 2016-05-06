@@ -1,14 +1,11 @@
 package uk.ac.aber.owj3.BonksandZaps;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
@@ -17,7 +14,6 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -35,11 +31,22 @@ import uk.ac.aber.owj3.BonksandZaps.utilities.CannotActException;
 public class main extends Application {
 
 	private Label[] labels = new Label[20];
-	private boolean doRun;
+	//private boolean doRun; //Doesn't function as it's supposed to yet
 	private Thread runGame;
 
 	GameApplication app = new GameApplication();
-
+	
+	
+	/**
+	 * This is the main method of the program, if no command line args are passed through it creates a new GameApplication
+	 * and calls it's CallMenu() method which starts a text based version of the game. But if '-gui' is used as a command 
+	 * line arg, then launch(args); is called and a GUI version of the Game will run. If some string other than '-gui' is 
+	 * entered, then the program will warn the player that that is not a valid arg and will quit itself.
+	 * 
+	 * @param args
+	 * @throws CannotActException
+	 * @throws InterruptedException
+	 */
 	public static void main(String[] args) throws CannotActException, InterruptedException {
 
 		// System.out.println(argc);
@@ -58,6 +65,10 @@ public class main extends Application {
 		app.callMenu();
 	}
 
+	/**
+	 * This method Draws the GUI onto the screen and deals with the button presses.
+	 * 
+	 */
 	public void start(Stage stage) throws CannotActException, InterruptedException, Exception {
 		Border border = new Border(
 				new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1)));
@@ -210,7 +221,7 @@ public class main extends Application {
 
 		stage.setScene(scene);
 		stage.setOnCloseRequest(e -> {
-			doRun = false;
+			//doRun = false;
 			Platform.exit();
 		});
 
@@ -222,23 +233,35 @@ public class main extends Application {
 		updateSettingsGUI();
 	}
 
+	/**
+	 * This method should pause the Simulation by setting doRun to false.
+	 * This in turn should cause the while loop to break, pausing the game.
+	 */
 	private void stopSimulation() {
-		doRun = false;
+		//doRun = false;
 		runGame.interrupt();
 	}
 
+	
+	/**
+	 * This is where the GUI menu choices go, the int's are passed into here.
+	 * Where they get passed to GameApplication to chose the relevant method.
+	 * It also starts the game in a new thread called runGame, this should allow the GUI to still
+	 * operate at the same time as the game.
+	 * 
+	 * @param choice
+	 */
 	private void menu(String choice) {
 
 		runGame = new Thread() {
 			public void run() {
-				doRun = true;
-
-				while (doRun == true) {
+				//doRun = true; //commented out as it caused the custom settings option to loop, even with 'doRun = false;' after it.
+				//while (doRun == true) {
 					Platform.runLater(new Runnable() {
 						public void run() {
 							try {
 								app.guiMenuSelector(choice);
-								doRun = false;
+								//doRun = false;
 							} catch (CannotActException | InterruptedException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -248,15 +271,19 @@ public class main extends Application {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
-					}
+					//}
 				}
 			}
 		};
 		runGame.start();
 		updateSettingsGUI();
-		doRun = false;
+		//doRun = false;
 	}
 
+	/**
+	 * This method simply updates the Settings options on the right side of the GUI.
+	 * This method is called after a menu option has completed it's task.
+	 */
 	private void updateSettingsGUI() {
 		labels[3].setText(app.getSettingsName());
 		labels[5].setText(app.getGridWorldXY());
